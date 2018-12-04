@@ -17,14 +17,14 @@ public class MittariActivity extends AppCompatActivity {
         ProgressBar fys = findViewById(R.id.progressBarFys);
         ProgressBar hen = findViewById(R.id.progressBarHenk);
         Intent intent = getIntent();
-        int henVointi = intent.getIntExtra("extra", 0);
+        float henVointi = intent.getFloatExtra("extra", 0);
         int fysVointi = intent.getIntExtra("fysVointi", 0);
         TextView fyysinen = findViewById(R.id.fysLuku);
         fyysinen.setText(Integer.toString(fysVointi));
         TextView henkinen = findViewById(R.id.henkLuku);
-        int uusiHenk = henVointi - 50;
-        henkinen.setText(Integer.toString(uusiHenk));
-        hen.setProgress(henVointi);
+        float uusiHenk = henVointi - 50;
+        henkinen.setText(Integer.toString(Math.round(uusiHenk)));
+        hen.setProgress(Math.round(henVointi));
         fys.setProgress(fysVointi);
 
         //buttonit
