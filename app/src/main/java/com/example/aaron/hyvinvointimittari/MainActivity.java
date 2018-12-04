@@ -96,6 +96,18 @@ public class MainActivity extends AppCompatActivity {
         suoritukset.add(new suoritukset("sprintti", 55));
         suoritukset.add(new suoritukset("kävely",15));
         suoritukset.add(new suoritukset("keihäänheitto",25));
+        suoritukset.add(new suoritukset("hiihto",45));
+        suoritukset.add(new suoritukset("koripallo",40));
+        suoritukset.add(new suoritukset("sähly",40));
+        suoritukset.add(new suoritukset("lentopallo",40));
+        suoritukset.add(new suoritukset("rullaluistelu",35));
+        suoritukset.add(new suoritukset("pyöräily, kevyt",30));
+        suoritukset.add(new suoritukset("pyöräily, raskas",50));
+        suoritukset.add(new suoritukset("kamppailu",45));
+        suoritukset.add(new suoritukset("laskettelu",40));
+        suoritukset.add(new suoritukset("moottoriurheilu",15));
+        suoritukset.add(new suoritukset("pesäpallo",40));
+        suoritukset.add(new suoritukset("venyttely",10));
 
         //luodaan olotila- ja suoritusvaihtoehdoista nimilistat
         ArrayList<String> suoritusNimet = new ArrayList<String>();
