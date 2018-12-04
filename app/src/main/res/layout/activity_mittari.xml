@@ -7,7 +7,7 @@
     tools:context=".MittariActivity">
 
     <ProgressBar
-        android:id="@+id/progressBar2"
+        android:id="@+id/progressBarFys"
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="333dp"
         android:layout_height="116dp"
@@ -18,16 +18,17 @@
         android:max="100"
         android:progress="0"
         android:progressTint="@color/colorAccent"
+        android:scaleY="2"
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.71"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.32999998" />
+        app:layout_constraintVertical_bias="0.331" />
 
     <ProgressBar
-        android:id="@+id/progressBar3"
+        android:id="@+id/progressBarHenk"
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="333dp"
         android:layout_height="116dp"
@@ -36,6 +37,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:progressTint="@color/colorAccent"
+        android:scaleY="2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.514"
@@ -53,7 +55,7 @@
         android:text="fyysinen luku"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/progressBar2" />
+        app:layout_constraintTop_toTopOf="@+id/progressBarFys" />
 
     <TextView
         android:id="@+id/henkLuku"
@@ -101,7 +103,7 @@
         app:layout_constraintVertical_bias="0.462" />
 
     <Button
-        android:id="@+id/alusta"
+        android:id="@+id/alustalähtien"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -117,13 +119,13 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="Viikottainen"
-        app:layout_constraintEnd_toStartOf="@+id/alusta"
+        app:layout_constraintEnd_toStartOf="@+id/alustalähtien"
         app:layout_constraintHorizontal_bias="0.47"
-        app:layout_constraintStart_toEndOf="@+id/Päivä"
+        app:layout_constraintStart_toEndOf="@+id/päivä"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/Päivä"
+        android:id="@+id/päivä"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
