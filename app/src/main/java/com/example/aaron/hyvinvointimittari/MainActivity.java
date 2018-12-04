@@ -28,7 +28,7 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
     //Declaring variables
     private int fysVointi = 0;
-    private int henVointi = 50;
+    private static int henVointi = 50;
     private Button suoritusButton;
     private Button userSettings;
     private AutoCompleteTextView oloTilaText;
@@ -198,10 +198,9 @@ public class MainActivity extends AppCompatActivity {
         userSettings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(thisActivity, MittariActivity.class);
+                Intent intent = new Intent(thisActivity, meemi.class);
                 // EditText editText = (EditText) findViewById(R.id.editText);
                 // String message = editText.getText().toString();
-                intent.putExtra("extra",100);
                 startActivity(intent);
             }
         });
@@ -216,4 +215,5 @@ public class MainActivity extends AppCompatActivity {
         prefEditor.commit();
         super.onPause();
     }
+
 }
