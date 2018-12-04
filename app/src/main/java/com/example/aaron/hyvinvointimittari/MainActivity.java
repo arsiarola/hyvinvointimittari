@@ -1,6 +1,8 @@
 package com.example.aaron.hyvinvointimittari;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
@@ -41,12 +43,16 @@ public class MainActivity extends AppCompatActivity {
     private Button oloTilaButton;
     private MainActivity thisActivity;
     private Button mittariButton;
+    private static final String PREF = "DATA";
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         //initializing variables
+        SharedPreferences prefGet = getSharedPreferences(PREF, Activity.MODE_PRIVATE);
+        henVointi = prefGet.getInt("henVointi",50);
+        fysVointi = prefGet.getInt("fysVointi", 0);
         mittariButton =  findViewById(R.id.mittari);
         userSettings = findViewById(R.id.userSettings);
         thisActivity = this;
@@ -189,5 +195,13 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
+    }
+    public void onPause(){
+        SharedPreferences prefPut = getSharedPreferences(PREF,Activity.MODE_PRIVATE);
+        SharedPreferences.Editor prefEditor = prefPut.edit();
+        prefEditor.putInt("henVointi", henVointi);
+        prefEditor.putInt("fysVointi", fysVointi);
+        prefEditor.commit();
+        super.onPause();
     }
 }
