@@ -28,7 +28,7 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
     //Declaring variables
     private int fysVointi = 0;
-    private static int henVointi = 50;
+    private float henVointi = 50;
     private Button suoritusButton;
     private Button userSettings;
     private AutoCompleteTextView oloTilaText;
@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         //initializing variables
         SharedPreferences prefGet = getSharedPreferences(PREF, Activity.MODE_PRIVATE);
-        henVointi = prefGet.getInt("henVointi",50);
+        henVointi = prefGet.getFloat("henVointi",50);
         fysVointi = prefGet.getInt("fysVointi", 0);
         mittariButton =  findViewById(R.id.mittari);
         userSettings = findViewById(R.id.userSettings);
@@ -170,6 +170,9 @@ public class MainActivity extends AppCompatActivity {
                 for (int i =0; i< olot.size(); i++){
                     if(oloTilaText.getText().toString().equals(olot.get(i).getOlotila())){
                         henVointi*=olot.get(i).getMultiplier();
+                        if(Math.round(henVointi) == 0) {
+                            henVointi = 1;
+                        }
                         oloTilaText.setText("");
                         wrongText=false;
                         break;
@@ -198,9 +201,10 @@ public class MainActivity extends AppCompatActivity {
         userSettings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(thisActivity, meemi.class);
+                Intent intent = new Intent(thisActivity, MittariActivity.class);
                 // EditText editText = (EditText) findViewById(R.id.editText);
                 // String message = editText.getText().toString();
+                intent.putExtra("extra",100);
                 startActivity(intent);
             }
         });
@@ -210,10 +214,9 @@ public class MainActivity extends AppCompatActivity {
     public void onPause(){
         SharedPreferences prefPut = getSharedPreferences(PREF,Activity.MODE_PRIVATE);
         SharedPreferences.Editor prefEditor = prefPut.edit();
-        prefEditor.putInt("henVointi", henVointi);
+        prefEditor.putFloat("henVointi", henVointi);
         prefEditor.putInt("fysVointi", fysVointi);
         prefEditor.commit();
         super.onPause();
     }
-
 }
