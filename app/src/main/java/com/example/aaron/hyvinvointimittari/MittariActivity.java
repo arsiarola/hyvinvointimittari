@@ -22,7 +22,8 @@ public class MittariActivity extends AppCompatActivity {
         TextView fyysinen = findViewById(R.id.fysLuku);
         fyysinen.setText(Integer.toString(fysVointi));
         TextView henkinen = findViewById(R.id.henkLuku);
-        henkinen.setText(Integer.toString(henVointi));
+        int uusiHenk = henVointi - 50;
+        henkinen.setText(Integer.toString(uusiHenk));
         hen.setProgress(henVointi);
         fys.setProgress(fysVointi);
 
