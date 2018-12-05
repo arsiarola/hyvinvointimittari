@@ -195,6 +195,7 @@ public class MainActivity extends AppCompatActivity {
                                 fysVointi = 100;
                             }
                             suoritus.setText("");
+                            suoritusMaara.setText("");
                             wrongText = false;
                             break;
                         }
@@ -203,6 +204,7 @@ public class MainActivity extends AppCompatActivity {
 
                 if (wrongText) {
                     suoritus.setText("virhe");
+
                 }
             }
         });
