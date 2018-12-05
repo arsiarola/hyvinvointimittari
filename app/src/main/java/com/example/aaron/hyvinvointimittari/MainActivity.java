@@ -97,7 +97,6 @@ public class MainActivity extends AppCompatActivity {
         vanhaAllTimeHenVointi = alltimeHenVointi;
         vanhaWeeklyFysVointi = weeklyFysVointi;
         vanhaWeeklyHenVointi = weeklyHenVointi;
-        fysVointi = 10;
         //katsotaan onko päivä muuttunut
         if(previousDate != day){
             numberOfDays++;
@@ -168,13 +167,13 @@ public class MainActivity extends AppCompatActivity {
             olotilaNimet.add(olot.get(i).getOlotila());
         }
 
-        //luodaan lista kirjoitettavista suoritus vaihtoehdoista
+        //luodaan lista kirjoitettavista vaihtoehdoista
         ArrayAdapter<String> adapter = new ArrayAdapter<String>
                 (this, android.R.layout.simple_list_item_1, suoritusNimet);
         suoritus.setThreshold(1); //will start working from first character
         suoritus.setAdapter(adapter);
 
-        //luodaan lista kirjoitettavista olotila vaihtoehdoista
+        //luodaan lista kirjoitettavista vaihtoehdoista
         ArrayAdapter<String> adapter2 = new ArrayAdapter<String>
                 (this, android.R.layout.simple_list_item_1, olotilaNimet);
         oloTilaText.setThreshold(1); //will start working from first character
@@ -192,10 +191,11 @@ public class MainActivity extends AppCompatActivity {
                 } catch (NumberFormatException e) {
                     textFail = true;
                 }
-                if(Double.parseDouble(suoritusMaara.getText().toString()) > 20) {
-                    suoritusMaara.setText("virhe!");
+                if(!textFail && Double.parseDouble(suoritusMaara.getText().toString())>24) {
+                    suoritus.setText("virhe");
+                    wrongText= true;
                 }
-                if (!textFail) {
+               else if (!textFail) {
                     for (int i = 0; i < suoritukset.size(); i++) {
                         if (suoritus.getText().toString().equals(suoritukset.get(i).getOlotila())) {
                             if(fysVointi <100){
@@ -222,7 +222,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-        //tyhjentää tiedot
+        //tyhjentää tekstikentän, kun sitä klikataan
         suoritus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -283,17 +283,6 @@ public class MainActivity extends AppCompatActivity {
                 intent.putExtra(alltimeHen,alltimeHenVointi);
                 intent.putExtra(alltimeFys,alltimeFysVointi);
                 intent.putExtra("päiviä",numberOfDays);
-                startActivity(intent);
-            }
-        });
-
-        //placeholder
-        userSettings.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(thisActivity, meemi.class);
-                // EditText editText = (EditText) findViewById(R.id.editText);
-                // String message = editText.getText().toString();
                 startActivity(intent);
             }
         });
