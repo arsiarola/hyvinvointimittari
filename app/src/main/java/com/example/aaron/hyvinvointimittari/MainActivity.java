@@ -59,6 +59,10 @@ public class MainActivity extends AppCompatActivity {
     private static String alltimeHen = "alltimeHenVointi";
     private static String weeklyHen = "weeklyHenVointi";
     private static String weeklyFys = "weeklyFysVointi";
+    public static int vanhaWeeklyFysVointi;
+    public static float vanhaWeeklyHenVointi;
+    public static int vanhaAlltimeFysVointi;
+    public static float vanhaAllTimeHenVointi;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
         kalenteri = Calendar.getInstance(TimeZone.getTimeZone("EET"));
         kalenteri.setFirstDayOfWeek(Calendar.MONDAY);
         day = kalenteri.get(kalenteri.DAY_OF_WEEK);
-
+        //haetaan tallenettu data
         SharedPreferences prefGet = getSharedPreferences(PREF, Activity.MODE_PRIVATE);
         henVointi = prefGet.getFloat("henVointi",50f);
         fysVointi = prefGet.getInt("fysVointi", 0);
@@ -89,7 +93,12 @@ public class MainActivity extends AppCompatActivity {
         alltimeHenVointi = prefGet.getFloat("alltimeHenVointi", 50f);
         numberOfDays = prefGet.getInt("numberOfDays", 1);
         previousDate = prefGet.getInt("previousDate", day);
-
+        vanhaAlltimeFysVointi = alltimeFysVointi;
+        vanhaAllTimeHenVointi = alltimeHenVointi;
+        vanhaWeeklyFysVointi = weeklyFysVointi;
+        vanhaWeeklyHenVointi = weeklyHenVointi;
+        fysVointi = 10;
+        //katsotaan onko päivä muuttunut
         if(previousDate != day){
             numberOfDays++;
             henVointi = 50;
@@ -193,6 +202,8 @@ public class MainActivity extends AppCompatActivity {
                             }
                             if(fysVointi>=100){
                                 fysVointi = 100;
+                                weeklyFysVointi = vanhaWeeklyFysVointi +100;
+                                alltimeFysVointi = vanhaAlltimeFysVointi+100;
                             }
                             suoritus.setText("");
                             suoritusMaara.setText("");
@@ -208,7 +219,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-
+        //tyhjentää tiedot
         suoritus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -234,12 +245,14 @@ public class MainActivity extends AppCompatActivity {
                             henVointi = 1;
                         }else if(henVointi >=100){
                             henVointi=100;
+                            alltimeFysVointi = vanhaAlltimeFysVointi+50;
+                            alltimeHenVointi = vanhaAllTimeHenVointi+50;
                         }
                         if (Math.round(weeklyHenVointi) == 0) {
-                            weeklyHenVointi = 1;
+                            weeklyHenVointi = vanhaAllTimeHenVointi+1;
                         }
                         if (Math.round(alltimeHenVointi) == 0) {
-                            alltimeHenVointi = 1;
+                            alltimeHenVointi = vanhaAllTimeHenVointi+1;
                         }
                         oloTilaText.setText("");
                         suoritusMaara.setText("");
@@ -286,7 +299,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onPause() {
-        //tallentaa tietoja
+        //tallentaa tietoa
         SharedPreferences prefPut = getSharedPreferences(PREF, Activity.MODE_PRIVATE);
         SharedPreferences.Editor prefEditor = prefPut.edit();
         prefEditor.putFloat("henVointi", henVointi);

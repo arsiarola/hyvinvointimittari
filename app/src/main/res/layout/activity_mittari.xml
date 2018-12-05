@@ -22,10 +22,10 @@
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.473"
+        app:layout_constraintHorizontal_bias="0.71"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.459" />
+        app:layout_constraintVertical_bias="0.458" />
 
     <ProgressBar
         android:id="@+id/progressBarHenk"
@@ -140,19 +140,21 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:layout_marginBottom="3dp"
         android:fontFamily="serif"
         android:text="Päivittäinen"
         android:textAppearance="@style/TextAppearance.AppCompat.Button"
         android:textSize="14sp"
         android:typeface="monospace"
+        app:layout_constraintBottom_toTopOf="@+id/hymy"
         app:layout_constraintEnd_toStartOf="@+id/viikko"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/fyysinenDailyProgress"
-        android:layout_width="129dp"
-        android:layout_height="31dp"
+        android:layout_width="80dp"
+        android:layout_height="30dp"
         android:layout_marginTop="68dp"
         android:layout_marginEnd="4dp"
         android:text="/100"
@@ -160,22 +162,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/progressBarFys" />
 
-    <TextView
-        android:id="@+id/henkMin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:text="-50"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/henkLuku" />
-
-    <TextView
-        android:id="@+id/henkMax"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="24dp"
-        android:text="50"
+    <ImageView
+        android:id="@+id/hymy"
+        android:layout_width="141dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="362dp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/henkLuku" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/päivä"
+        tools:srcCompat="@tools:sample/avatars" />
 
 </android.support.constraint.ConstraintLayout>

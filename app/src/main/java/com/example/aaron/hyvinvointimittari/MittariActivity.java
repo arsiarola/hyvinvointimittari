@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -27,6 +28,7 @@ public class MittariActivity extends AppCompatActivity {
     private float viikkoUusiHenk;
     private float alustaUusiHenk;
     private int numberOfDays;
+    private ImageView hymy;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,10 +58,14 @@ public class MittariActivity extends AppCompatActivity {
         alustaUusiHenk = alltimeHenVointi -50*numberOfDays;
         hen.setProgress(Math.round(henVointi));
         fys.setProgress(fysVointi);
-
+        hymy = findViewById(R.id.hymy);
         final TextView fyysinenDailyProgress = findViewById(R.id.fyysinenDailyProgress);
         fyysinenDailyProgress.setText(Integer.toString(fysVointi) + "/100");
-
+        if(henVointi<50){
+            hymy.setImageResource(R.drawable.suru);
+        }else if (henVointi >=50){
+            hymy.setImageResource(R.drawable.hymy);
+        }
         //buttonit
 
         ////paiva napin teko ja onclicklistener
@@ -70,6 +76,11 @@ public class MittariActivity extends AppCompatActivity {
         paiva.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
+                if(henVointi<50){
+                    hymy.setImageResource(R.drawable.suru);
+                }else if (henVointi >=50){
+                    hymy.setImageResource(R.drawable.hymy);
+                }
                 paiva.setPressed(true);
                 viikko.setPressed(false);
                 alusta.setPressed(false);
@@ -91,6 +102,11 @@ public class MittariActivity extends AppCompatActivity {
         viikko.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
+                if(weeklyHenVointi/7<50){
+                    hymy.setImageResource(R.drawable.suru);
+                }else if (weeklyHenVointi/7 >=50){
+                    hymy.setImageResource(R.drawable.hymy);
+                }
                 paiva.setPressed(false);
                 viikko.setPressed(true);
                 alusta.setPressed(false);
@@ -111,6 +127,11 @@ public class MittariActivity extends AppCompatActivity {
         alusta.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
+                if(alltimeHenVointi/numberOfDays<50){
+                    hymy.setImageResource(R.drawable.suru);
+                }else if (alltimeHenVointi/numberOfDays>=50){
+                    hymy.setImageResource(R.drawable.hymy);
+                }
                 viikko.setPressed(false);
                 paiva.setPressed(false);
                 alusta.setPressed(true);
