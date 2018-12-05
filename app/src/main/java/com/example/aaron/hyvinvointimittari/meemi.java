@@ -37,9 +37,9 @@ public class meemi extends AppCompatActivity {
             public void onClick(View v) {
 
                 if(MainActivity.henVointi<100){
+                    MainActivity.weeklyHenVointi+= -MainActivity.henVointi+MainActivity.henVointi*(float)1.1;
+                    MainActivity.alltimeHenVointi+= -MainActivity.henVointi+MainActivity.henVointi*(float)1.1;
                     MainActivity.henVointi*= (float)1.1;
-                    MainActivity.weeklyHenVointi*= (float)1.1;
-                    MainActivity.alltimeHenVointi*= (float)1.1;
                 }
                 if (MainActivity.henVointi>=100){
                     MainActivity.henVointi = 100;
@@ -60,9 +60,9 @@ public class meemi extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(MainActivity.henVointi>0){
+                    MainActivity.weeklyHenVointi-= MainActivity.henVointi-MainActivity.henVointi*(float)0.9;
+                    MainActivity.alltimeHenVointi-= MainActivity.henVointi-MainActivity.henVointi*(float)0.9;
                     MainActivity.henVointi*= (float)0.9;
-                    MainActivity.weeklyHenVointi*= (float)0.9;
-                    MainActivity.alltimeHenVointi*= (float)0.9;
                 }
                 if (MainActivity.henVointi<=0){
                     MainActivity.henVointi = 0;

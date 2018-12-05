@@ -43,12 +43,10 @@ public class MainActivity extends AppCompatActivity {
     private AutoCompleteTextView oloTilaText;
     private AutoCompleteTextView suoritus;
     private EditText suoritusMaara;
-    public static int EXTRA_MESSAGE = 100;
     private ArrayList<olotilat> olot;
     private ArrayList<suoritukset> suoritukset;
     private boolean wrongText = true;
     private boolean textFail = true;
-    int recentMultiplier;
     private Button oloTilaButton;
     private MainActivity thisActivity;
     private Button mittariButton;
@@ -91,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
         alltimeHenVointi = prefGet.getFloat("alltimeHenVointi", 50f);
         numberOfDays = prefGet.getInt("numberOfDays", 1);
         previousDate = prefGet.getInt("previousDate", day);
-        Log.d("äksdee",previousDate + " ja " + day);
+
         if(previousDate != day){
             numberOfDays++;
             henVointi = 50;
@@ -218,9 +216,11 @@ public class MainActivity extends AppCompatActivity {
                 for (int i = 0; i < olot.size(); i++) {
                     if (oloTilaText.getText().toString().equals(olot.get(i).getOlotila())) {
                         if(henVointi <100){
+                            weeklyHenVointi += -henVointi + henVointi * olot.get(i).getMultiplier();
+                            alltimeHenVointi += -henVointi + henVointi*olot.get(i).getMultiplier();
                             henVointi *= olot.get(i).getMultiplier();
-                            weeklyHenVointi *= olot.get(i).getMultiplier();
-                            alltimeHenVointi *= olot.get(i).getMultiplier();
+
+
                         }
                         if (Math.round(henVointi) == 0) {
                             henVointi = 1;
