@@ -161,13 +161,13 @@ public class MainActivity extends AppCompatActivity {
             olotilaNimet.add(olot.get(i).getOlotila());
         }
 
-        //luodaan lista kirjoitettavista vaihtoehdoista
+        //luodaan lista kirjoitettavista suoritus vaihtoehdoista
         ArrayAdapter<String> adapter = new ArrayAdapter<String>
                 (this, android.R.layout.simple_list_item_1, suoritusNimet);
         suoritus.setThreshold(1); //will start working from first character
         suoritus.setAdapter(adapter);
 
-        //luodaan lista kirjoitettavista vaihtoehdoista
+        //luodaan lista kirjoitettavista olotila vaihtoehdoista
         ArrayAdapter<String> adapter2 = new ArrayAdapter<String>
                 (this, android.R.layout.simple_list_item_1, olotilaNimet);
         oloTilaText.setThreshold(1); //will start working from first character
