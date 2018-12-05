@@ -32,7 +32,6 @@ public class meemi extends AppCompatActivity {
         int x = R.drawable.ic_launcher_background;
         meemi=findViewById(R.id.imageView);
 
-        random = rand.nextInt(19) + 0;
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
