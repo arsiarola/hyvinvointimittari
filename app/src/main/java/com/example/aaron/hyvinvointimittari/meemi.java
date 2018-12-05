@@ -1,6 +1,8 @@
 package com.example.aaron.hyvinvointimittari;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -13,6 +15,17 @@ public class meemi extends AppCompatActivity {
     private Random rand = new Random();
     private int random;
     private ImageView meemi;
+    private float henVointi;
+    private int fysVointi;
+    private int  weeklyFysVointi;
+    private float weeklyHenVointi;
+    private float alltimeHenVointi;
+    private int alltimeFysVointi;
+    private int vanhaWeeklyFysVointi;
+    private float vanhaWeeklyHenVointi;
+    private int vanhaAlltimeFysVointi;
+    private float vanhaAllTimeHenVointi;
+
     private final int[]  images = {R.drawable.yks, R.drawable.kaks, R.drawable.kol,R.drawable.nel,R.drawable.viis,R.drawable.kuus,
             R.drawable.seiska,R.drawable.kasi,R.drawable.ysi,R.drawable.kymppi,R.drawable.ykstoist,R.drawable.kakstoist,R.drawable.koltoist,
             R.drawable.neltoist,R.drawable.viistoist,R.drawable.kuustoist,R.drawable.seitsemantoist,R.drawable.kaheksantoist,
@@ -27,24 +40,35 @@ public class meemi extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_meemi);
         Intent intent = getIntent();
-        float henVointi = intent.getFloatExtra("extra", 0);
+        henVointi = intent.getFloatExtra("extra", 50f);
+        fysVointi = intent.getIntExtra("fysVointi", 0);
+        weeklyHenVointi = intent.getFloatExtra("weeklyHenVointi",50f);
+        weeklyFysVointi = intent.getIntExtra("weeklyFysVointi",0);
+        alltimeHenVointi = intent.getFloatExtra("alltimeHenVointi",50f);
+        alltimeFysVointi = intent.getIntExtra("alltimeFysVointi",0);
+        vanhaAlltimeFysVointi = intent.getIntExtra("vanhaAllFys", 0);
+        vanhaAllTimeHenVointi = intent.getFloatExtra("vanhaAllHen",50f);
+        vanhaWeeklyFysVointi = intent.getIntExtra("vanhaWeekFys", 0);
+        vanhaWeeklyHenVointi = intent.getFloatExtra("vanhaWeekHen", 50f);
+
         Button b1=findViewById(R.id.b1);
         int x = R.drawable.ic_launcher_background;
         meemi=findViewById(R.id.imageView);
+
         //ensimmäinen nappi lisää hyvinvointia
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                if(MainActivity.henVointi<100){
-                    MainActivity.weeklyHenVointi+= -MainActivity.henVointi+MainActivity.henVointi*(float)1.1;
-                    MainActivity.alltimeHenVointi+= -MainActivity.henVointi+MainActivity.henVointi*(float)1.1;
-                    MainActivity.henVointi*= (float)1.1;
+                if(henVointi<100){
+                    weeklyHenVointi+= -henVointi+henVointi*(float)1.1;
+                    alltimeHenVointi+= -henVointi+henVointi*(float)1.1;
+                    henVointi*= (float)1.1;
                 }
-                if (MainActivity.henVointi>=100){
-                    MainActivity.henVointi = 100;
-                    MainActivity.weeklyHenVointi = MainActivity.vanhaWeeklyHenVointi + 100;
-                    MainActivity.alltimeHenVointi = MainActivity.vanhaAllTimeHenVointi + 100;
+                if (henVointi>=100){
+                    henVointi = 100;
+                    weeklyHenVointi = vanhaWeeklyHenVointi + 100;
+                    alltimeHenVointi = vanhaAllTimeHenVointi + 100;
                 }
             }
         });
@@ -61,22 +85,22 @@ public class meemi extends AppCompatActivity {
         b3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(MainActivity.henVointi>0){
-                    MainActivity.weeklyHenVointi-= MainActivity.henVointi-MainActivity.henVointi*(float)0.9;
-                    MainActivity.alltimeHenVointi-= MainActivity.henVointi-MainActivity.henVointi*(float)0.9;
-                    MainActivity.henVointi*= (float)0.9;
+                if(henVointi>0){
+                    weeklyHenVointi-= henVointi-henVointi*(float)0.9;
+                    alltimeHenVointi-= henVointi-henVointi*(float)0.9;
+                    henVointi*= (float)0.9;
                 }
-                if (Math.round(MainActivity.henVointi) == 0) {
-                    MainActivity.henVointi = 1;
-                }else if(MainActivity.henVointi >=100){
-                    MainActivity.henVointi=100;
-                    MainActivity.alltimeHenVointi = MainActivity.vanhaAllTimeHenVointi+50;
+                if (Math.round(henVointi) == 0) {
+                    henVointi = 1;
+                }else if(henVointi >=100){
+                    henVointi=100;
+                    alltimeHenVointi = vanhaAllTimeHenVointi+50;
                 }
-                if (Math.round(MainActivity.weeklyHenVointi) == 0) {
-                    MainActivity.weeklyHenVointi = MainActivity.vanhaAllTimeHenVointi;
+                if (Math.round(weeklyHenVointi) == 0) {
+                    weeklyHenVointi = vanhaAllTimeHenVointi;
                 }
-                if (Math.round(MainActivity.alltimeHenVointi) == 0) {
-                    MainActivity.alltimeHenVointi = MainActivity.vanhaAllTimeHenVointi;
+                if (Math.round(alltimeHenVointi) == 0) {
+                    alltimeHenVointi = vanhaAllTimeHenVointi;
                 }
 
             }
@@ -84,5 +108,18 @@ public class meemi extends AppCompatActivity {
         //arvotaan uusi kuva kun activityn avaa
         meemi.setImageResource(images[rand.nextInt(images.length)]);
 
+    }
+    public void onPause() {
+        //tallentaa tietoa
+        SharedPreferences prefPut = getSharedPreferences(MainActivity.PREF, Activity.MODE_PRIVATE);
+        SharedPreferences.Editor prefEditor = prefPut.edit();
+        prefEditor.putFloat("henVointi", henVointi);
+        prefEditor.putInt("fysVointi", fysVointi);
+        prefEditor.putInt(MainActivity.weeklyFys, weeklyFysVointi);
+        prefEditor.putFloat(MainActivity.weeklyHen, weeklyHenVointi);
+        prefEditor.putInt(MainActivity.alltimeFys, alltimeFysVointi);
+        prefEditor.putFloat(MainActivity.alltimeHen, alltimeHenVointi);
+        prefEditor.commit();
+        super.onPause();
     }
 }
