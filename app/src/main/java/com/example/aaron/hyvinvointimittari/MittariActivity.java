@@ -25,6 +25,7 @@ public class MittariActivity extends AppCompatActivity {
     private float uusiHenk;
     private float viikkoUusiHenk;
     private float alustaUusiHenk;
+    private int numberOfDays;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,12 +33,13 @@ public class MittariActivity extends AppCompatActivity {
         fys = findViewById(R.id.progressBarFys);
         hen = findViewById(R.id.progressBarHenk);
         Intent intent = getIntent();
-        henVointi = intent.getFloatExtra("extra", 50);
+        henVointi = intent.getFloatExtra("extra", 50f);
         fysVointi = intent.getIntExtra("fysVointi", 0);
-        weeklyHenVointi = intent.getFloatExtra("weeklyHenVointi",50);
+        weeklyHenVointi = intent.getFloatExtra("weeklyHenVointi",50f);
         weeklyFysVointi = intent.getIntExtra("weeklyFysVointi",0);
-        alltimeHenVointi = intent.getFloatExtra("alltimeHenVointi",50);
+        alltimeHenVointi = intent.getFloatExtra("alltimeHenVointi",50f);
         alltimeFysVointi = intent.getIntExtra("alltimeFysVointi",50);
+        numberOfDays = intent.getIntExtra("päiviä",1);
         fyysinen = findViewById(R.id.fysLuku);
         fyysinen.setText(Integer.toString(fysVointi));
         henkinen = findViewById(R.id.henkLuku);
@@ -69,8 +71,8 @@ public class MittariActivity extends AppCompatActivity {
         viikko.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                hen.setProgress(Math.round(weeklyHenVointi));
-                fys.setProgress(weeklyFysVointi);
+                hen.setProgress(Math.round(weeklyHenVointi/7));
+                fys.setProgress(weeklyFysVointi/7);
                 fyysinen.setText(Integer.toString(weeklyFysVointi));
                 henkinen.setText(Integer.toString(Math.round(viikkoUusiHenk)));
                 fyysinenDailyProgress.setText(Integer.toString(weeklyFysVointi) + "/700");
@@ -81,8 +83,8 @@ public class MittariActivity extends AppCompatActivity {
         alusta.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                hen.setProgress(Math.round(alltimeHenVointi));
-                fys.setProgress(alltimeFysVointi);
+                hen.setProgress(Math.round(alltimeHenVointi/numberOfDays));
+                fys.setProgress(alltimeFysVointi/numberOfDays);
                 fyysinen.setText(Integer.toString(alltimeFysVointi));
                 henkinen.setText(Integer.toString(Math.round(alustaUusiHenk)));
                 fyysinenDailyProgress.setText(Integer.toString(alltimeFysVointi) + "/∞");

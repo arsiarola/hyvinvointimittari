@@ -56,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
     private Calendar kalenteri;
     private int previousDate;
     private int day;
+    private int numberOfDays = 1;
     private static String alltimeFys = "alltimeFysVointi";
     private static String alltimeHen = "alltimeHenVointi";
     private static String weeklyHen = "weeklyHenVointi";
@@ -87,9 +88,11 @@ public class MainActivity extends AppCompatActivity {
         weeklyFysVointi = prefGet.getInt("weeklyFysVointi", 0);
         alltimeFysVointi = prefGet.getInt("alltimeFysVointi", 0);
         alltimeHenVointi = prefGet.getFloat("alltimeHenVointi", 50f);
+        numberOfDays = prefGet.getInt("numberOfDays", 1);
         previousDate = prefGet.getInt("previousDate", day);
         Log.d("äksdee",previousDate + " ja " + day);
         if(previousDate != day){
+            numberOfDays++;
             henVointi = 50;
             fysVointi = 0;
             if(day == 2){
@@ -181,12 +184,17 @@ public class MainActivity extends AppCompatActivity {
                 } catch (NumberFormatException e) {
                     textFail = true;
                 }
-                if (textFail == false) {
+                if (!textFail) {
                     for (int i = 0; i < suoritukset.size(); i++) {
                         if (suoritus.getText().toString().equals(suoritukset.get(i).getOlotila())) {
-                            fysVointi += time * suoritukset.get(i).getMultiplier();
-                            weeklyFysVointi += time * suoritukset.get(i).getMultiplier();
-                            alltimeFysVointi += time * suoritukset.get(i).getMultiplier();
+                            if(fysVointi <=100){
+                                fysVointi += time * suoritukset.get(i).getMultiplier();
+                                weeklyFysVointi += time * suoritukset.get(i).getMultiplier();
+                                alltimeFysVointi += time * suoritukset.get(i).getMultiplier();
+                            }
+                            if(fysVointi>100){
+                                fysVointi = 100;
+                            }
                             suoritus.setText("");
                             wrongText = false;
                             break;
@@ -194,7 +202,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
 
-                if (wrongText == true) {
+                if (wrongText) {
                     suoritus.setText("virhe");
                 }
             }
@@ -208,19 +216,24 @@ public class MainActivity extends AppCompatActivity {
                 wrongText = true;
                 for (int i = 0; i < olot.size(); i++) {
                     if (oloTilaText.getText().toString().equals(olot.get(i).getOlotila())) {
-                        henVointi *= olot.get(i).getMultiplier();
+                        if(henVointi <=100){
+                            henVointi *= olot.get(i).getMultiplier();
+                            weeklyHenVointi *= olot.get(i).getMultiplier();
+                            alltimeHenVointi *= olot.get(i).getMultiplier();
+                        }
                         if (Math.round(henVointi) == 0) {
                             henVointi = 1;
+                        }else if(henVointi >100){
+                            henVointi=100;
                         }
-                        weeklyHenVointi *= olot.get(i).getMultiplier();
                         if (Math.round(weeklyHenVointi) == 0) {
                             weeklyHenVointi = 1;
                         }
-                        alltimeHenVointi *= olot.get(i).getMultiplier();
                         if (Math.round(alltimeHenVointi) == 0) {
                             alltimeHenVointi = 1;
                         }
                         oloTilaText.setText("");
+                        suoritusMaara.setText("");
                         wrongText = false;
                         break;
                     }
@@ -244,6 +257,7 @@ public class MainActivity extends AppCompatActivity {
                 intent.putExtra(weeklyHen, weeklyHenVointi);
                 intent.putExtra(alltimeHen,alltimeHenVointi);
                 intent.putExtra(alltimeFys,alltimeFysVointi);
+                intent.putExtra("päiviä",numberOfDays);
                 startActivity(intent);
             }
         });
@@ -273,6 +287,7 @@ public class MainActivity extends AppCompatActivity {
         prefEditor.putInt(alltimeFys, alltimeFysVointi);
         prefEditor.putFloat(alltimeHen, alltimeHenVointi);
         prefEditor.putInt("previousDate", kalenteri.get(kalenteri.DAY_OF_WEEK));
+        prefEditor.putInt("numberOfDays", numberOfDays);
         prefEditor.commit();
         super.onPause();
     }
