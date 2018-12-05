@@ -59,7 +59,6 @@ public class MittariActivity extends AppCompatActivity {
         ////paiva napin teko ja onclicklistener
         paiva = findViewById(R.id.päivä);
         paiva.setPressed(true);
-
         ////paiva pysyy valittuna kun painaa sitä
 
         paiva.setOnTouchListener(new View.OnTouchListener() {
