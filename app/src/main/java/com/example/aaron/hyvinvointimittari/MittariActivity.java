@@ -25,6 +25,7 @@ public class MittariActivity extends AppCompatActivity {
     private float uusiHenk;
     private float viikkoUusiHenk;
     private float alustaUusiHenk;
+    private int numberOfDays;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,6 +39,7 @@ public class MittariActivity extends AppCompatActivity {
         weeklyFysVointi = intent.getIntExtra("weeklyFysVointi",0);
         alltimeHenVointi = intent.getFloatExtra("alltimeHenVointi",50f);
         alltimeFysVointi = intent.getIntExtra("alltimeFysVointi",50);
+        numberOfDays = intent.getIntExtra("päiviä",1);
         fyysinen = findViewById(R.id.fysLuku);
         fyysinen.setText(Integer.toString(fysVointi));
         henkinen = findViewById(R.id.henkLuku);
@@ -81,8 +83,8 @@ public class MittariActivity extends AppCompatActivity {
         alusta.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                hen.setProgress(Math.round(alltimeHenVointi));
-                fys.setProgress(alltimeFysVointi);
+                hen.setProgress(Math.round(alltimeHenVointi/numberOfDays));
+                fys.setProgress(alltimeFysVointi/numberOfDays);
                 fyysinen.setText(Integer.toString(alltimeFysVointi));
                 henkinen.setText(Integer.toString(Math.round(alustaUusiHenk)));
                 fyysinenDailyProgress.setText(Integer.toString(alltimeFysVointi) + "/∞");

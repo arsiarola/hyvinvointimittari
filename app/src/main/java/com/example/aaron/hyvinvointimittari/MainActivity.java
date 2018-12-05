@@ -56,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
     private Calendar kalenteri;
     private int previousDate;
     private int day;
+    private int numberOfDays = 1;
     private static String alltimeFys = "alltimeFysVointi";
     private static String alltimeHen = "alltimeHenVointi";
     private static String weeklyHen = "weeklyHenVointi";
@@ -87,9 +88,11 @@ public class MainActivity extends AppCompatActivity {
         weeklyFysVointi = prefGet.getInt("weeklyFysVointi", 0);
         alltimeFysVointi = prefGet.getInt("alltimeFysVointi", 0);
         alltimeHenVointi = prefGet.getFloat("alltimeHenVointi", 50f);
+        numberOfDays = prefGet.getInt("numberOfDays", 1);
         previousDate = prefGet.getInt("previousDate", day);
         Log.d("äksdee",previousDate + " ja " + day);
         if(previousDate != day){
+            numberOfDays++;
             henVointi = 50;
             fysVointi = 0;
             if(day == 2){
@@ -254,6 +257,7 @@ public class MainActivity extends AppCompatActivity {
                 intent.putExtra(weeklyHen, weeklyHenVointi);
                 intent.putExtra(alltimeHen,alltimeHenVointi);
                 intent.putExtra(alltimeFys,alltimeFysVointi);
+                intent.putExtra("päiviä",numberOfDays);
                 startActivity(intent);
             }
         });
@@ -283,6 +287,7 @@ public class MainActivity extends AppCompatActivity {
         prefEditor.putInt(alltimeFys, alltimeFysVointi);
         prefEditor.putFloat(alltimeHen, alltimeHenVointi);
         prefEditor.putInt("previousDate", kalenteri.get(kalenteri.DAY_OF_WEEK));
+        prefEditor.putInt("numberOfDays", numberOfDays);
         prefEditor.commit();
         super.onPause();
     }
