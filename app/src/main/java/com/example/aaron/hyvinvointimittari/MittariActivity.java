@@ -32,11 +32,11 @@ public class MittariActivity extends AppCompatActivity {
         fys = findViewById(R.id.progressBarFys);
         hen = findViewById(R.id.progressBarHenk);
         Intent intent = getIntent();
-        henVointi = intent.getFloatExtra("extra", 50);
+        henVointi = intent.getFloatExtra("extra", 50f);
         fysVointi = intent.getIntExtra("fysVointi", 0);
-        weeklyHenVointi = intent.getFloatExtra("weeklyHenVointi",50);
+        weeklyHenVointi = intent.getFloatExtra("weeklyHenVointi",50f);
         weeklyFysVointi = intent.getIntExtra("weeklyFysVointi",0);
-        alltimeHenVointi = intent.getFloatExtra("alltimeHenVointi",50);
+        alltimeHenVointi = intent.getFloatExtra("alltimeHenVointi",50f);
         alltimeFysVointi = intent.getIntExtra("alltimeFysVointi",50);
         fyysinen = findViewById(R.id.fysLuku);
         fyysinen.setText(Integer.toString(fysVointi));

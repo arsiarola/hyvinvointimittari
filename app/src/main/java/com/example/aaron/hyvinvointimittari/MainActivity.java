@@ -181,12 +181,17 @@ public class MainActivity extends AppCompatActivity {
                 } catch (NumberFormatException e) {
                     textFail = true;
                 }
-                if (textFail == false) {
+                if (!textFail) {
                     for (int i = 0; i < suoritukset.size(); i++) {
                         if (suoritus.getText().toString().equals(suoritukset.get(i).getOlotila())) {
-                            fysVointi += time * suoritukset.get(i).getMultiplier();
-                            weeklyFysVointi += time * suoritukset.get(i).getMultiplier();
-                            alltimeFysVointi += time * suoritukset.get(i).getMultiplier();
+                            if(fysVointi <=100){
+                                fysVointi += time * suoritukset.get(i).getMultiplier();
+                                weeklyFysVointi += time * suoritukset.get(i).getMultiplier();
+                                alltimeFysVointi += time * suoritukset.get(i).getMultiplier();
+                            }
+                            if(fysVointi>100){
+                                fysVointi = 100;
+                            }
                             suoritus.setText("");
                             wrongText = false;
                             break;
@@ -194,7 +199,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
 
-                if (wrongText == true) {
+                if (wrongText) {
                     suoritus.setText("virhe");
                 }
             }
@@ -208,19 +213,24 @@ public class MainActivity extends AppCompatActivity {
                 wrongText = true;
                 for (int i = 0; i < olot.size(); i++) {
                     if (oloTilaText.getText().toString().equals(olot.get(i).getOlotila())) {
-                        henVointi *= olot.get(i).getMultiplier();
+                        if(henVointi <=100){
+                            henVointi *= olot.get(i).getMultiplier();
+                            weeklyHenVointi *= olot.get(i).getMultiplier();
+                            alltimeHenVointi *= olot.get(i).getMultiplier();
+                        }
                         if (Math.round(henVointi) == 0) {
                             henVointi = 1;
+                        }else if(henVointi >100){
+                            henVointi=100;
                         }
-                        weeklyHenVointi *= olot.get(i).getMultiplier();
                         if (Math.round(weeklyHenVointi) == 0) {
                             weeklyHenVointi = 1;
                         }
-                        alltimeHenVointi *= olot.get(i).getMultiplier();
                         if (Math.round(alltimeHenVointi) == 0) {
                             alltimeHenVointi = 1;
                         }
                         oloTilaText.setText("");
+                        suoritusMaara.setText("");
                         wrongText = false;
                         break;
                     }
