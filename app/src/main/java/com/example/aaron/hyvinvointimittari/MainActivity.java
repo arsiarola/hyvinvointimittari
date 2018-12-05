@@ -61,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
     private static String alltimeHen = "alltimeHenVointi";
     private static String weeklyHen = "weeklyHenVointi";
     private static String weeklyFys = "weeklyFysVointi";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -187,12 +188,12 @@ public class MainActivity extends AppCompatActivity {
                 if (!textFail) {
                     for (int i = 0; i < suoritukset.size(); i++) {
                         if (suoritus.getText().toString().equals(suoritukset.get(i).getOlotila())) {
-                            if(fysVointi <=100){
+                            if(fysVointi <100){
                                 fysVointi += time * suoritukset.get(i).getMultiplier();
                                 weeklyFysVointi += time * suoritukset.get(i).getMultiplier();
                                 alltimeFysVointi += time * suoritukset.get(i).getMultiplier();
                             }
-                            if(fysVointi>100){
+                            if(fysVointi>=100){
                                 fysVointi = 100;
                             }
                             suoritus.setText("");
@@ -216,14 +217,14 @@ public class MainActivity extends AppCompatActivity {
                 wrongText = true;
                 for (int i = 0; i < olot.size(); i++) {
                     if (oloTilaText.getText().toString().equals(olot.get(i).getOlotila())) {
-                        if(henVointi <=100){
+                        if(henVointi <100){
                             henVointi *= olot.get(i).getMultiplier();
                             weeklyHenVointi *= olot.get(i).getMultiplier();
                             alltimeHenVointi *= olot.get(i).getMultiplier();
                         }
                         if (Math.round(henVointi) == 0) {
                             henVointi = 1;
-                        }else if(henVointi >100){
+                        }else if(henVointi >=100){
                             henVointi=100;
                         }
                         if (Math.round(weeklyHenVointi) == 0) {

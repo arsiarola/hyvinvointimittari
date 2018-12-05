@@ -104,21 +104,28 @@
 
     <Button
         android:id="@+id/alustalähtien"
+        style="@android:style/Widget.Material.Light.Button.Inset"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
+        android:fontFamily="serif"
         android:text="Alusta saakka"
+        android:textAppearance="@style/TextAppearance.AppCompat.Button"
+        android:textSize="14sp"
+        android:typeface="monospace"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/viikko"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/viikko"
+        style="@android:style/Widget.Material.Light.Button.Inset"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="Viikottainen"
+        android:textAppearance="@style/TextAppearance.AppCompat.Button"
         app:layout_constraintEnd_toStartOf="@+id/alustalähtien"
         app:layout_constraintHorizontal_bias="0.47"
         app:layout_constraintStart_toEndOf="@+id/päivä"
@@ -126,11 +133,16 @@
 
     <Button
         android:id="@+id/päivä"
+        style="@android:style/Widget.Material.Light.Button.Inset"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:fontFamily="serif"
         android:text="Päivittäinen"
+        android:textAppearance="@style/TextAppearance.AppCompat.Button"
+        android:textSize="14sp"
+        android:typeface="monospace"
         app:layout_constraintEnd_toStartOf="@+id/viikko"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
