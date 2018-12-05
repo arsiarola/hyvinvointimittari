@@ -3,6 +3,7 @@ package com.example.aaron.hyvinvointimittari;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
@@ -55,6 +56,7 @@ public class MittariActivity extends AppCompatActivity {
 
         //buttonit
 
+        ////paiva napin teko ja onclicklistener
         paiva = findViewById(R.id.päivä);
         paiva.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,13 +67,23 @@ public class MittariActivity extends AppCompatActivity {
                 henkinen.setText(Integer.toString(Math.round(uusiHenk)));
                 fyysinenDailyProgress.setText(Integer.toString(fysVointi) + "/100");
 
-                if (paiva.isPressed())
-                {
-                    paiva.setFocusable(true);
-                }
-
             }
         });
+
+
+        ////paiva pysyy valittuna kun painaa sitä
+
+        paiva.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                paiva.setPressed(true);
+                viikko.setPressed(false);
+                alusta.setPressed(false);
+                return true;
+            }
+        });
+
+        ////viikko napin teko ja onclicklistener
 
         viikko = findViewById(R.id.viikko);
         viikko.setOnClickListener(new View.OnClickListener() {
@@ -83,13 +95,22 @@ public class MittariActivity extends AppCompatActivity {
                 henkinen.setText(Integer.toString(Math.round(viikkoUusiHenk)));
                 fyysinenDailyProgress.setText(Integer.toString(weeklyFysVointi) + "/700");
 
-                if (viikko.isPressed())
-                {
-                    viikko.setFocusable(true);
-                }
             }
         });
 
+        ////viikko pysyy valittuna kun painaa sitä
+
+        viikko.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                paiva.setPressed(false);
+                viikko.setPressed(true);
+                alusta.setPressed(false);
+                return true;
+            }
+        });
+
+        ////alusta napin teko ja onclicklistener
         alusta = findViewById(R.id.alustalähtien);
         alusta.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -100,11 +121,18 @@ public class MittariActivity extends AppCompatActivity {
                 henkinen.setText(Integer.toString(Math.round(alustaUusiHenk)));
                 fyysinenDailyProgress.setText(Integer.toString(alltimeFysVointi) + "/∞");
 
-                if (alusta.isPressed())
-                {
-                    alusta.setFocusable(true);
-                }
+            }
+        });
 
+        ////alusta pysyy valittuna kun painaa sitä
+
+        alusta.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                viikko.setPressed(false);
+                paiva.setPressed(false);
+                alusta.setPressed(true);
+                return true;
             }
         });
 
