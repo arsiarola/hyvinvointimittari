@@ -16,7 +16,11 @@ public class meemi extends AppCompatActivity {
     private final int[]  images = {R.drawable.yks, R.drawable.kaks, R.drawable.kol,R.drawable.nel,R.drawable.viis,R.drawable.kuus,
             R.drawable.seiska,R.drawable.kasi,R.drawable.ysi,R.drawable.kymppi,R.drawable.ykstoist,R.drawable.kakstoist,R.drawable.koltoist,
             R.drawable.neltoist,R.drawable.viistoist,R.drawable.kuustoist,R.drawable.seitsemantoist,R.drawable.kaheksantoist,
-            R.drawable.yheksantoist,R.drawable.kakskyt};
+            R.drawable.yheksantoist,R.drawable.kakskyt,R.drawable.kaksyks,R.drawable.kakskaks,R.drawable.kakskol,R.drawable.kaksnel,
+            R.drawable.kaksvii,R.drawable.kakskuu,R.drawable.kakssei,R.drawable.kakskas,R.drawable.kaksysi,R.drawable.kolkyt,
+            R.drawable.kolyks,R.drawable.kolkaks,R.drawable.kolkol,R.drawable.kolnel,R.drawable.kolvii,R.drawable.kolkuu,R.drawable.kolsei,
+            R.drawable.kolkasi,R.drawable.kolysi,R.drawable.nelkyt,R.drawable.nelyks,R.drawable.nelkaks,R.drawable.nelkol,R.drawable.nelnel,
+            R.drawable.nelvii,R.drawable.nelkuu,R.drawable.nelsei,R.drawable.nelkasi,R.drawable.nelysi,R.drawable.viiskyt};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
