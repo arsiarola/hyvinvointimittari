@@ -140,11 +140,13 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:layout_marginBottom="3dp"
         android:fontFamily="serif"
         android:text="Päivittäinen"
         android:textAppearance="@style/TextAppearance.AppCompat.Button"
         android:textSize="14sp"
         android:typeface="monospace"
+        app:layout_constraintBottom_toTopOf="@+id/hymy"
         app:layout_constraintEnd_toStartOf="@+id/viikko"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -159,5 +161,17 @@
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/progressBarFys" />
+
+    <ImageView
+        android:id="@+id/hymy"
+        android:layout_width="141dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="362dp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/päivä"
+        tools:srcCompat="@tools:sample/avatars" />
 
 </android.support.constraint.ConstraintLayout>

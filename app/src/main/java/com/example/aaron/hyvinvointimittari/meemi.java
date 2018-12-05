@@ -43,6 +43,8 @@ public class meemi extends AppCompatActivity {
                 }
                 if (MainActivity.henVointi>=100){
                     MainActivity.henVointi = 100;
+                    MainActivity.weeklyHenVointi = MainActivity.vanhaWeeklyHenVointi + 100;
+                    MainActivity.alltimeHenVointi = MainActivity.vanhaAllTimeHenVointi + 100;
                 }
             }
         });
@@ -64,12 +66,19 @@ public class meemi extends AppCompatActivity {
                     MainActivity.alltimeHenVointi-= MainActivity.henVointi-MainActivity.henVointi*(float)0.9;
                     MainActivity.henVointi*= (float)0.9;
                 }
-                if (MainActivity.henVointi<=0){
-                    MainActivity.henVointi = 0;
+                if (Math.round(MainActivity.henVointi) == 0) {
+                    MainActivity.henVointi = 1;
+                }else if(MainActivity.henVointi >=100){
+                    MainActivity.henVointi=100;
+                    MainActivity.alltimeHenVointi = MainActivity.vanhaAllTimeHenVointi+50;
+                }
+                if (Math.round(MainActivity.weeklyHenVointi) == 0) {
+                    MainActivity.weeklyHenVointi = MainActivity.vanhaAllTimeHenVointi;
+                }
+                if (Math.round(MainActivity.alltimeHenVointi) == 0) {
+                    MainActivity.alltimeHenVointi = MainActivity.vanhaAllTimeHenVointi;
                 }
 
-
-            ;
             }
         });
         //arvotaan uusi kuva kun activityn avaa
