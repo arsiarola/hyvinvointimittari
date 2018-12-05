@@ -69,8 +69,8 @@ public class MittariActivity extends AppCompatActivity {
         viikko.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                hen.setProgress(Math.round(weeklyHenVointi));
-                fys.setProgress(weeklyFysVointi);
+                hen.setProgress(Math.round(weeklyHenVointi/7));
+                fys.setProgress(weeklyFysVointi/7);
                 fyysinen.setText(Integer.toString(weeklyFysVointi));
                 henkinen.setText(Integer.toString(Math.round(viikkoUusiHenk)));
                 fyysinenDailyProgress.setText(Integer.toString(weeklyFysVointi) + "/700");
