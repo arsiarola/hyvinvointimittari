@@ -31,7 +31,7 @@ public class meemi extends AppCompatActivity {
         Button b1=findViewById(R.id.b1);
         int x = R.drawable.ic_launcher_background;
         meemi=findViewById(R.id.imageView);
-
+        //ensimmäinen nappi lisää hyvinvointia
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -46,7 +46,7 @@ public class meemi extends AppCompatActivity {
                 }
             }
         });
-
+        //toinen nappi arpoo uuden kuvan
         Button b2=findViewById(R.id.b2);
         b2.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,7 +54,7 @@ public class meemi extends AppCompatActivity {
                 meemi.setImageResource(images[rand.nextInt(images.length)]);
             }
         });
-
+        //kolmas nappi vähentää henkistä hyvinvointia
         Button b3=findViewById(R.id.b3);
         b3.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,6 +72,8 @@ public class meemi extends AppCompatActivity {
             ;
             }
         });
+        //arvotaan uusi kuva kun activityn avaa
         meemi.setImageResource(images[rand.nextInt(images.length)]);
+
     }
 }
