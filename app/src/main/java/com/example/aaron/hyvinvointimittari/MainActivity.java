@@ -97,7 +97,6 @@ public class MainActivity extends AppCompatActivity {
         vanhaAllTimeHenVointi = alltimeHenVointi;
         vanhaWeeklyFysVointi = weeklyFysVointi;
         vanhaWeeklyHenVointi = weeklyHenVointi;
-        fysVointi = 10;
         //katsotaan onko päivä muuttunut
         if(previousDate != day){
             numberOfDays++;
@@ -219,7 +218,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-        //tyhjentää tiedot
+        //tyhjentää tekstikentän, kun sitä klikataan
         suoritus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -280,17 +279,6 @@ public class MainActivity extends AppCompatActivity {
                 intent.putExtra(alltimeHen,alltimeHenVointi);
                 intent.putExtra(alltimeFys,alltimeFysVointi);
                 intent.putExtra("päiviä",numberOfDays);
-                startActivity(intent);
-            }
-        });
-
-        //placeholder
-        userSettings.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(thisActivity, meemi.class);
-                // EditText editText = (EditText) findViewById(R.id.editText);
-                // String message = editText.getText().toString();
                 startActivity(intent);
             }
         });
