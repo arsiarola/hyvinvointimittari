@@ -10,7 +10,7 @@
         android:id="@+id/progressBarFys"
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="333dp"
-        android:layout_height="116dp"
+        android:layout_height="125dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="5dp"
@@ -134,5 +134,16 @@
         app:layout_constraintEnd_toStartOf="@+id/viikko"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/fyysinenDailyProgress"
+        android:layout_width="80dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="68dp"
+        android:layout_marginEnd="4dp"
+        android:text="/100"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/progressBarFys" />
 
 </android.support.constraint.ConstraintLayout>
