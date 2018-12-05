@@ -62,6 +62,12 @@ public class MittariActivity extends AppCompatActivity {
                 fyysinen.setText(Integer.toString(fysVointi));
                 henkinen.setText(Integer.toString(Math.round(uusiHenk)));
                 fyysinenDailyProgress.setText(Integer.toString(fysVointi) + "/100");
+
+                if (paiva.isPressed())
+                {
+                    paiva.setFocusable(true);
+                }
+
             }
         });
 
@@ -74,6 +80,11 @@ public class MittariActivity extends AppCompatActivity {
                 fyysinen.setText(Integer.toString(weeklyFysVointi));
                 henkinen.setText(Integer.toString(Math.round(viikkoUusiHenk)));
                 fyysinenDailyProgress.setText(Integer.toString(weeklyFysVointi) + "/700");
+
+                if (viikko.isPressed())
+                {
+                    viikko.setFocusable(true);
+                }
             }
         });
 
@@ -86,6 +97,11 @@ public class MittariActivity extends AppCompatActivity {
                 fyysinen.setText(Integer.toString(alltimeFysVointi));
                 henkinen.setText(Integer.toString(Math.round(alustaUusiHenk)));
                 fyysinenDailyProgress.setText(Integer.toString(alltimeFysVointi) + "/∞");
+
+                if (alusta.isPressed())
+                {
+                    alusta.setFocusable(true);
+                }
 
             }
         });
