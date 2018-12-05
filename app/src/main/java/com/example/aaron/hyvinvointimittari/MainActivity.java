@@ -192,6 +192,9 @@ public class MainActivity extends AppCompatActivity {
                 } catch (NumberFormatException e) {
                     textFail = true;
                 }
+                if(Double.parseDouble(suoritusMaara.getText().toString()) > 20) {
+                    suoritusMaara.setText("virhe!");
+                }
                 if (!textFail) {
                     for (int i = 0; i < suoritukset.size(); i++) {
                         if (suoritus.getText().toString().equals(suoritukset.get(i).getOlotila())) {
