@@ -209,6 +209,12 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        suoritus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                suoritus.setText("");
+            }
+        });
 
         //lisää uuden olotilan
         oloTilaButton.setOnClickListener(new View.OnClickListener() {

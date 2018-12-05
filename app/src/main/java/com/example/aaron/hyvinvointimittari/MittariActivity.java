@@ -46,8 +46,8 @@ public class MittariActivity extends AppCompatActivity {
         henkinen = findViewById(R.id.henkLuku);
         uusiHenk = henVointi - 50;
         henkinen.setText(Integer.toString(Math.round(uusiHenk)));
-        viikkoUusiHenk = weeklyHenVointi -50;
-        alustaUusiHenk = alltimeHenVointi -50;
+        viikkoUusiHenk = weeklyHenVointi -350;
+        alustaUusiHenk = alltimeHenVointi -50*numberOfDays;
         hen.setProgress(Math.round(henVointi));
         fys.setProgress(fysVointi);
 
@@ -91,7 +91,7 @@ public class MittariActivity extends AppCompatActivity {
                 hen.setProgress(Math.round(weeklyHenVointi/7));
                 fys.setProgress(weeklyFysVointi/7);
                 fyysinen.setText(Integer.toString(weeklyFysVointi));
-                henkinen.setText(Integer.toString(Math.round(viikkoUusiHenk)));
+                henkinen.setText(Integer.toString(Math.round(viikkoUusiHenk/7)));
                 fyysinenDailyProgress.setText(Integer.toString(weeklyFysVointi) + "/700");
                 return true;
             }
@@ -111,7 +111,7 @@ public class MittariActivity extends AppCompatActivity {
                 hen.setProgress(Math.round(alltimeHenVointi/numberOfDays));
                 fys.setProgress(alltimeFysVointi/numberOfDays);
                 fyysinen.setText(Integer.toString(alltimeFysVointi));
-                henkinen.setText(Integer.toString(Math.round(alustaUusiHenk)));
+                henkinen.setText(Integer.toString(Math.round(alustaUusiHenk/numberOfDays)));
                 fyysinenDailyProgress.setText(Integer.toString(alltimeFysVointi) + "/∞");
                 return true;
             }
