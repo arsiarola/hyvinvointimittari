@@ -3,6 +3,7 @@ package com.example.aaron.hyvinvointimittari;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
@@ -55,40 +56,65 @@ public class MittariActivity extends AppCompatActivity {
 
         //buttonit
 
+        ////paiva napin teko ja onclicklistener
         paiva = findViewById(R.id.päivä);
-        paiva.setOnClickListener(new View.OnClickListener() {
+        paiva.setPressed(true);
+
+        ////paiva pysyy valittuna kun painaa sitä
+
+        paiva.setOnTouchListener(new View.OnTouchListener() {
             @Override
-            public void onClick(View v) {
+            public boolean onTouch(View v, MotionEvent event) {
+                paiva.setPressed(true);
+                viikko.setPressed(false);
+                alusta.setPressed(false);
                 hen.setProgress(Math.round(henVointi));
                 fys.setProgress(fysVointi);
                 fyysinen.setText(Integer.toString(fysVointi));
                 henkinen.setText(Integer.toString(Math.round(uusiHenk)));
                 fyysinenDailyProgress.setText(Integer.toString(fysVointi) + "/100");
+                return true;
             }
         });
 
+        ////viikko napin teko ja onclicklistener
+
         viikko = findViewById(R.id.viikko);
-        viikko.setOnClickListener(new View.OnClickListener() {
+
+        ////viikko pysyy valittuna kun painaa sitä
+
+        viikko.setOnTouchListener(new View.OnTouchListener() {
             @Override
-            public void onClick(View v) {
+            public boolean onTouch(View v, MotionEvent event) {
+                paiva.setPressed(false);
+                viikko.setPressed(true);
+                alusta.setPressed(false);
                 hen.setProgress(Math.round(weeklyHenVointi/7));
                 fys.setProgress(weeklyFysVointi/7);
                 fyysinen.setText(Integer.toString(weeklyFysVointi));
                 henkinen.setText(Integer.toString(Math.round(viikkoUusiHenk)));
                 fyysinenDailyProgress.setText(Integer.toString(weeklyFysVointi) + "/700");
+                return true;
             }
         });
 
+        ////alusta napin teko ja onclicklistener
         alusta = findViewById(R.id.alustalähtien);
-        alusta.setOnClickListener(new View.OnClickListener() {
+
+        ////alusta pysyy valittuna kun painaa sitä
+
+        alusta.setOnTouchListener(new View.OnTouchListener() {
             @Override
-            public void onClick(View v) {
+            public boolean onTouch(View v, MotionEvent event) {
+                viikko.setPressed(false);
+                paiva.setPressed(false);
+                alusta.setPressed(true);
                 hen.setProgress(Math.round(alltimeHenVointi/numberOfDays));
                 fys.setProgress(alltimeFysVointi/numberOfDays);
                 fyysinen.setText(Integer.toString(alltimeFysVointi));
                 henkinen.setText(Integer.toString(Math.round(alustaUusiHenk)));
                 fyysinenDailyProgress.setText(Integer.toString(alltimeFysVointi) + "/∞");
-
+                return true;
             }
         });
 
