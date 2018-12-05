@@ -58,18 +58,7 @@ public class MittariActivity extends AppCompatActivity {
 
         ////paiva napin teko ja onclicklistener
         paiva = findViewById(R.id.päivä);
-        /*paiva.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                hen.setProgress(Math.round(henVointi));
-                fys.setProgress(fysVointi);
-                fyysinen.setText(Integer.toString(fysVointi));
-                henkinen.setText(Integer.toString(Math.round(uusiHenk)));
-                fyysinenDailyProgress.setText(Integer.toString(fysVointi) + "/100");
-
-            }
-        });*/
-
+        paiva.setPressed(true);
 
         ////paiva pysyy valittuna kun painaa sitä
 
@@ -91,17 +80,6 @@ public class MittariActivity extends AppCompatActivity {
         ////viikko napin teko ja onclicklistener
 
         viikko = findViewById(R.id.viikko);
-        /*viikko.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                hen.setProgress(Math.round(weeklyHenVointi/7));
-                fys.setProgress(weeklyFysVointi/7);
-                fyysinen.setText(Integer.toString(weeklyFysVointi));
-                henkinen.setText(Integer.toString(Math.round(viikkoUusiHenk)));
-                fyysinenDailyProgress.setText(Integer.toString(weeklyFysVointi) + "/700");
-
-            }
-        });*/
 
         ////viikko pysyy valittuna kun painaa sitä
 
@@ -122,17 +100,6 @@ public class MittariActivity extends AppCompatActivity {
 
         ////alusta napin teko ja onclicklistener
         alusta = findViewById(R.id.alustalähtien);
-        /*alusta.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                hen.setProgress(Math.round(alltimeHenVointi/numberOfDays));
-                fys.setProgress(alltimeFysVointi/numberOfDays);
-                fyysinen.setText(Integer.toString(alltimeFysVointi));
-                henkinen.setText(Integer.toString(Math.round(alustaUusiHenk)));
-                fyysinenDailyProgress.setText(Integer.toString(alltimeFysVointi) + "/∞");
-
-            }
-        });*/
 
         ////alusta pysyy valittuna kun painaa sitä
 
