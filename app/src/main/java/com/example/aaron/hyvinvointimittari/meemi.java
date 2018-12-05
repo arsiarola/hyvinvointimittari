@@ -13,7 +13,10 @@ public class meemi extends AppCompatActivity {
     private Random rand = new Random();
     private int random;
     private ImageView meemi;
-    private final int[]  images = {R.drawable.yks, R.drawable.kaks, R.drawable.kol,R.drawable.nel,R.drawable.viis,R.drawable.kuus,R.drawable.seiska,R.drawable.kasi,R.drawable.ysi,R.drawable.kymppi,R.drawable.ykstoist,R.drawable.kakstoist,R.drawable.koltoist,R.drawable.neltoist,R.drawable.viistoist,R.drawable.kuustoist,R.drawable.seitsemantoist,R.drawable.kaheksantoist,R.drawable.yheksantoist,R.drawable.kakskyt};
+    private final int[]  images = {R.drawable.yks, R.drawable.kaks, R.drawable.kol,R.drawable.nel,R.drawable.viis,R.drawable.kuus,
+            R.drawable.seiska,R.drawable.kasi,R.drawable.ysi,R.drawable.kymppi,R.drawable.ykstoist,R.drawable.kakstoist,R.drawable.koltoist,
+            R.drawable.neltoist,R.drawable.viistoist,R.drawable.kuustoist,R.drawable.seitsemantoist,R.drawable.kaheksantoist,
+            R.drawable.yheksantoist,R.drawable.kakskyt};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
