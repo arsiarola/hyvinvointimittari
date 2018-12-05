@@ -4,11 +4,8 @@ package com.example.aaron.hyvinvointimittari;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.Build;
-import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -16,7 +13,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import java.util.Calendar;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.TimeZone;
 
 /*ideas for project:
@@ -32,14 +28,14 @@ import java.util.TimeZone;
  */
 public class MainActivity extends AppCompatActivity {
     //Declaring variables
-    public static int fysVointi = 0;
-    public static float henVointi = 50;
+    private int fysVointi = 0;
+    private float henVointi = 50;
     private int weeklyFysVointi = 0;
-    public static float weeklyHenVointi = 50;
+    private float weeklyHenVointi = 50;
     private int alltimeFysVointi = 0;
-    public static float alltimeHenVointi = 50;
+    private float alltimeHenVointi = 50;
     private Button suoritusButton;
-    private Button userSettings;
+    private Button meemiButton;
     private AutoCompleteTextView oloTilaText;
     private AutoCompleteTextView suoritus;
     private EditText suoritusMaara;
@@ -50,19 +46,19 @@ public class MainActivity extends AppCompatActivity {
     private Button oloTilaButton;
     private MainActivity thisActivity;
     private Button mittariButton;
-    private static final String PREF = "DATA";
+    public static final String PREF = "DATA";
     private Calendar kalenteri;
     private int previousDate;
     private int day;
     private int numberOfDays = 1;
-    private static String alltimeFys = "alltimeFysVointi";
-    private static String alltimeHen = "alltimeHenVointi";
-    private static String weeklyHen = "weeklyHenVointi";
-    private static String weeklyFys = "weeklyFysVointi";
-    public static int vanhaWeeklyFysVointi;
-    public static float vanhaWeeklyHenVointi;
-    public static int vanhaAlltimeFysVointi;
-    public static float vanhaAllTimeHenVointi;
+    public final static String alltimeFys = "alltimeFysVointi";
+    public final static String alltimeHen = "alltimeHenVointi";
+    public final static String weeklyHen = "weeklyHenVointi";
+    public final static String weeklyFys = "weeklyFysVointi";
+    private int vanhaWeeklyFysVointi;
+    private float vanhaWeeklyHenVointi;
+    private int vanhaAlltimeFysVointi;
+    private float vanhaAllTimeHenVointi;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,10 +66,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         //initializing variables
 
+        mittariarvot arvot = mittariarvot.getInstance();
 
 
         mittariButton =  findViewById(R.id.mittari);
-        userSettings = findViewById(R.id.userSettings);
+        meemiButton = findViewById(R.id.meemiButton);
         thisActivity = this;
         oloTilaText = findViewById(R.id.olotila);
         oloTilaButton = findViewById(R.id.oloTilaButton);
@@ -286,6 +283,23 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        meemiButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(thisActivity, meemi.class);
+                intent.putExtra("extra", henVointi);
+                intent.putExtra("fysVointi", fysVointi);
+                intent.putExtra(weeklyFys, weeklyFysVointi);
+                intent.putExtra(weeklyHen, weeklyHenVointi);
+                intent.putExtra(alltimeHen,alltimeHenVointi);
+                intent.putExtra(alltimeFys,alltimeFysVointi);
+                intent.putExtra("vanhaWeekHen",vanhaWeeklyHenVointi);
+                intent.putExtra("vanhaWeekFys",vanhaWeeklyFysVointi);
+                intent.putExtra("vanhaAllHen",vanhaAllTimeHenVointi);
+                intent.putExtra("vanhaAllFys",vanhaAlltimeFysVointi);
+                startActivity(intent);
+            }
+        });
 
 
 
@@ -305,5 +319,21 @@ public class MainActivity extends AppCompatActivity {
         prefEditor.putInt("numberOfDays", numberOfDays);
         prefEditor.commit();
         super.onPause();
+    }
+    public void onResume(){
+        SharedPreferences prefGet = getSharedPreferences(PREF, Activity.MODE_PRIVATE);
+        henVointi = prefGet.getFloat("henVointi",50f);
+        fysVointi = prefGet.getInt("fysVointi", 0);
+        weeklyHenVointi = prefGet.getFloat("weeklyHenVointi", 50f);
+        weeklyFysVointi = prefGet.getInt("weeklyFysVointi", 0);
+        alltimeFysVointi = prefGet.getInt("alltimeFysVointi", 0);
+        alltimeHenVointi = prefGet.getFloat("alltimeHenVointi", 50f);
+        numberOfDays = prefGet.getInt("numberOfDays", 1);
+        previousDate = prefGet.getInt("previousDate", day);
+        vanhaAlltimeFysVointi = alltimeFysVointi;
+        vanhaAllTimeHenVointi = alltimeHenVointi;
+        vanhaWeeklyFysVointi = weeklyFysVointi;
+        vanhaWeeklyHenVointi = weeklyHenVointi;
+        super.onResume();
     }
 }
