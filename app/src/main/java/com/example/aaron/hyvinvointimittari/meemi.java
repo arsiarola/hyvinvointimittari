@@ -35,7 +35,15 @@ public class meemi extends AppCompatActivity {
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-          MainActivity.henVointi*= (float)1.1;
+
+                if(MainActivity.henVointi<100){
+                    MainActivity.henVointi*= (float)1.1;
+                    MainActivity.weeklyHenVointi*= (float)1.1;
+                    MainActivity.alltimeHenVointi*= (float)1.1;
+                }
+                if (MainActivity.henVointi>=100){
+                    MainActivity.henVointi = 100;
+                }
             }
         });
 
@@ -51,7 +59,17 @@ public class meemi extends AppCompatActivity {
         b3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-            MainActivity.henVointi*= (float)0.9;
+                if(MainActivity.henVointi>0){
+                    MainActivity.henVointi*= (float)0.9;
+                    MainActivity.weeklyHenVointi*= (float)0.9;
+                    MainActivity.alltimeHenVointi*= (float)0.9;
+                }
+                if (MainActivity.henVointi<=0){
+                    MainActivity.henVointi = 0;
+                }
+
+
+            ;
             }
         });
         meemi.setImageResource(images[rand.nextInt(images.length)]);
