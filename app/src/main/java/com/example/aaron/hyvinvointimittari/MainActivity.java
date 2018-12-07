@@ -4,12 +4,14 @@ package com.example.aaron.hyvinvointimittari;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -30,11 +32,7 @@ import java.util.TimeZone;
  */
 
 /**
-<<<<<<< HEAD
- * MainActivity deals with information on the main screen
-=======
  * Tällä activitylla listätään henkisen- ja fyysisenhyvinvoinnin liittyviä toimenpitetiä
->>>>>>> 4d82e293225616ba1451212fe2f6f14b25edbe52
  */
 public class MainActivity extends AppCompatActivity {
     //Declaring variables
@@ -83,6 +81,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         //initializing variables
+        //checkboxit
+        final CheckBox checkBoxFys = findViewById(R.id.checkBoxFys);
+        final CheckBox checkBoxHenk = findViewById(R.id.checkBoxHenk);
+
         mittariButton =  findViewById(R.id.mittari);
         meemiButton = findViewById(R.id.meemiButton);
         thisActivity = this;
@@ -108,6 +110,7 @@ public class MainActivity extends AppCompatActivity {
         vanhaAllTimeHenVointi = alltimeHenVointi;
         vanhaWeeklyFysVointi = weeklyFysVointi;
         vanhaWeeklyHenVointi = weeklyHenVointi;
+        fysVointi = 10;
         //katsotaan onko päivä muuttunut
         if(previousDate != day){
             numberOfDays++;
@@ -212,6 +215,8 @@ public class MainActivity extends AppCompatActivity {
                             }
                             if(fysVointi>=100){
                                 fysVointi = 100;
+                                weeklyFysVointi = vanhaWeeklyFysVointi +100;
+                                alltimeFysVointi = vanhaAlltimeFysVointi+100;
                             }
                             suoritus.setText("");
                             suoritusMaara.setText("");
@@ -225,6 +230,26 @@ public class MainActivity extends AppCompatActivity {
                     suoritus.setText("virhe");
 
                 }
+                /// listätty checkbox toiminta
+
+                new CountDownTimer(2000, 1000) {
+
+                    public void onTick(long millisUntilFinished) {
+                        if(wrongText) {
+                            checkBoxFys.setText("Ei lisätty");
+                            checkBoxFys.setChecked(false);
+                        } else {
+                            checkBoxFys.setText("Lisätty");
+                            checkBoxFys.setChecked(true);
+                        }
+                }
+
+                    public void onFinish() {
+                        checkBoxFys.setText("");
+                        checkBoxFys.setChecked(false);
+                    }
+                }.start();
+
             }
         });
         //tyhjentää tiedot
@@ -253,6 +278,8 @@ public class MainActivity extends AppCompatActivity {
                             henVointi = 1;
                         }else if(henVointi >=100){
                             henVointi=100;
+                            alltimeFysVointi = vanhaAlltimeFysVointi+50;
+                            alltimeHenVointi = vanhaAllTimeHenVointi+50;
                         }
                         if (Math.round(weeklyHenVointi) == 0) {
                             weeklyHenVointi = vanhaAllTimeHenVointi+1;
@@ -269,6 +296,25 @@ public class MainActivity extends AppCompatActivity {
                 if (wrongText == true) {
                     oloTilaText.setText("virhe");
                 }
+                /// listätty checkbox toiminta olotiloihin
+
+                new CountDownTimer(2000, 1000) {
+
+                    public void onTick(long millisUntilFinished) {
+                        if(wrongText) {
+                            checkBoxHenk.setText("Ei lisätty");
+                            checkBoxHenk.setChecked(false);
+                        } else {
+                            checkBoxHenk.setText("Lisätty");
+                            checkBoxHenk.setChecked(true);
+                        }
+                    }
+
+                    public void onFinish() {
+                        checkBoxHenk.setText("");
+                        checkBoxHenk.setChecked(false);
+                    }
+                }.start();
             }
         });
 
@@ -322,10 +368,6 @@ public class MainActivity extends AppCompatActivity {
         prefEditor.putFloat(alltimeHen, alltimeHenVointi);
         prefEditor.putInt("previousDate", kalenteri.get(kalenteri.DAY_OF_WEEK));
         prefEditor.putInt("numberOfDays", numberOfDays);
-        prefEditor.putInt("vanhaallfys",vanhaAlltimeFysVointi);
-        prefEditor.putFloat("vanhaallhen",vanhaAllTimeHenVointi);
-        prefEditor.putInt("vanhweekfys",vanhaWeeklyFysVointi);
-        prefEditor.putFloat("vanhaweekhen",vanhaWeeklyHenVointi);
         prefEditor.commit();
         super.onPause();
     }
