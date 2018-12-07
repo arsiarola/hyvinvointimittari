@@ -140,32 +140,34 @@
 
     <CheckBox
         android:id="@+id/checkBoxFys"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="110dp"
+        android:layout_height="51dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="4dp"
+        android:buttonTint="@color/colorAccent"
+        android:text="Lisätty"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.84"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.13999999" />
+        app:layout_constraintTop_toBottomOf="@+id/fysSuoritusButton" />
+
 
     <CheckBox
         android:id="@+id/checkBoxHenk"
-        android:layout_width="wrap_content"
-        android:layout_height="32dp"
+        android:layout_width="110dp"
+        android:layout_height="51dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginEnd="4dp"
+        android:buttonTint="@color/colorAccent"
+        android:text="Lisätty"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.84"
+        app:layout_constraintHorizontal_bias="0.983"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.447" />
+        app:layout_constraintTop_toBottomOf="@+id/oloTilaButton" />
+
 
 </android.support.constraint.ConstraintLayout>
