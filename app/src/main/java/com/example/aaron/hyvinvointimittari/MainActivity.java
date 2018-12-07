@@ -215,8 +215,12 @@ public class MainActivity extends AppCompatActivity {
                             }
                             if(fysVointi>=100){
                                 fysVointi = 100;
-                                weeklyFysVointi = vanhaWeeklyFysVointi +100;
-                                alltimeFysVointi = vanhaAlltimeFysVointi+100;
+                                if (weeklyFysVointi/numberOfDays != 100){
+                                    weeklyFysVointi = vanhaWeeklyFysVointi+100;
+                                }
+                                if(alltimeFysVointi/numberOfDays != 100) {
+                                    alltimeFysVointi = vanhaAlltimeFysVointi + 100;
+                                }
                             }
                             suoritus.setText("");
                             suoritusMaara.setText("");
@@ -267,18 +271,13 @@ public class MainActivity extends AppCompatActivity {
                 wrongText = true;
                 for (int i = 0; i < olot.size(); i++) {
                     if (oloTilaText.getText().toString().equals(olot.get(i).getOlotila())) {
-                        if(henVointi <100){
                             weeklyHenVointi += -henVointi + henVointi * olot.get(i).getMultiplier();
                             alltimeHenVointi += -henVointi + henVointi*olot.get(i).getMultiplier();
                             henVointi *= olot.get(i).getMultiplier();
-
-
-                        }
                         if (Math.round(henVointi) == 0) {
                             henVointi = 1;
                         }else if(henVointi >=100){
                             henVointi=100;
-                            alltimeFysVointi = vanhaAlltimeFysVointi+50;
                             alltimeHenVointi = vanhaAllTimeHenVointi+50;
                         }
                         if (Math.round(weeklyHenVointi) == 0) {
