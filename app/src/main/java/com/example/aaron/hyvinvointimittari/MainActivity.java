@@ -87,7 +87,10 @@ public class MainActivity extends AppCompatActivity {
         //checkboxit
         final CheckBox checkBoxFys = findViewById(R.id.checkBoxFys);
         final CheckBox checkBoxHenk = findViewById(R.id.checkBoxHenk);
-
+        checkBoxFys.setText("");
+        checkBoxHenk.setText("");
+        checkBoxHenk.setChecked(false);
+        checkBoxFys.setChecked(false);
         mittariButton =  findViewById(R.id.mittari);
         meemiButton = findViewById(R.id.meemiButton);
         thisActivity = this;
