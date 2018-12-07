@@ -96,9 +96,9 @@ public class MittariActivity extends AppCompatActivity {
         viikko.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                if(weeklyHenVointi/7<50){
+                if(weeklyHenVointi<50){
                     hymy.setImageResource(R.drawable.suru);
-                }else if (weeklyHenVointi/7 >=50){
+                }else if (weeklyHenVointi >=50){
                     hymy.setImageResource(R.drawable.hymy);
                 }
                 paiva.setPressed(false);

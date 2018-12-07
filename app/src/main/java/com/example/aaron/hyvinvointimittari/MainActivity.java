@@ -26,6 +26,10 @@ import java.util.TimeZone;
   this way we can also get listview and saving information to the project
 
  */
+
+/**
+ * MainActivity deals with information on the main screen
+ */
 public class MainActivity extends AppCompatActivity {
     //Declaring variables
     private int fysVointi = 0;
@@ -65,9 +69,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         //initializing variables
-
-        mittariarvot arvot = mittariarvot.getInstance();
-
 
         mittariButton =  findViewById(R.id.mittari);
         meemiButton = findViewById(R.id.meemiButton);
