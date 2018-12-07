@@ -11,6 +11,10 @@ import android.widget.ImageView;
 
 import java.util.Random;
 
+/**
+ * Näytetään mmemejä josta voi valita piristi tai masensi, jolloin henkinen hyvinvointi reagoi siihen
+ * uuden meemin saa painamalla uusi meemi tai poistumalla acitivitysta ja tulemalla takaisin
+ */
 public class meemi extends AppCompatActivity {
     private Random rand = new Random();
     private int random;
@@ -35,6 +39,10 @@ public class meemi extends AppCompatActivity {
             R.drawable.kolkasi,R.drawable.kolysi,R.drawable.nelkyt,R.drawable.nelyks,R.drawable.nelkaks,R.drawable.nelkol,R.drawable.nelnel,
             R.drawable.nelvii,R.drawable.nelkuu,R.drawable.nelsei,R.drawable.nelkasi,R.drawable.nelysi,R.drawable.viiskyt};
 
+    /**
+     * Alustetaan buttonit ja muuttujat, listätään niihin logiikka.
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -107,8 +115,11 @@ public class meemi extends AppCompatActivity {
         });
         //arvotaan uusi kuva kun activityn avaa
         meemi.setImageResource(images[rand.nextInt(images.length)]);
+        }
 
-    }
+    /**
+     * kun poistutaan acitivysta tallentaan datan muutokset
+     */
     public void onPause() {
         //tallentaa tietoa
         SharedPreferences prefPut = getSharedPreferences(MainActivity.PREF, Activity.MODE_PRIVATE);

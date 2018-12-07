@@ -28,6 +28,10 @@ import java.util.TimeZone;
   this way we can also get listview and saving information to the project
 
  */
+
+/**
+ * Tällä activitylla listätään henkisen- ja fyysisenhyvinvoinnin liittyviä toimenpitetiä
+ */
 public class MainActivity extends AppCompatActivity {
     //Declaring variables
     private int fysVointi = 0;
@@ -62,13 +66,19 @@ public class MainActivity extends AppCompatActivity {
     private int vanhaAlltimeFysVointi;
     private float vanhaAllTimeHenVointi;
 
+    /**
+     * Alustetaan buttonit ja muuttujat, listätään niihin logiikka.
+     * Olotilojen ja suorituksien luominen, jotka lisätään omiin arraylisteihinsä
+     * laskee kuluneet päivät joiden avulla voidaan määrittää onko viikko jo kulunut
+     * tehdään olotila- ja suorituslistoista uudet nimilistat joita käytetään Autocompleteview:n
+     * kanssa
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         //initializing variables
-
-        mittariarvot arvot = mittariarvot.getInstance();
 
 
         mittariButton =  findViewById(R.id.mittari);
@@ -160,7 +170,7 @@ public class MainActivity extends AppCompatActivity {
         //luodaan olotila- ja suoritusvaihtoehdoista nimilistat
         ArrayList<String> suoritusNimet = new ArrayList<String>();
         for (int i = 0; i < suoritukset.size(); i++) {
-            suoritusNimet.add(suoritukset.get(i).getOlotila());
+            suoritusNimet.add(suoritukset.get(i).getSuoritus());
         }
         ArrayList<String> olotilaNimet = new ArrayList();
         for (int i = 0; i < olot.size(); i++) {
@@ -193,7 +203,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 if (!textFail) {
                     for (int i = 0; i < suoritukset.size(); i++) {
-                        if (suoritus.getText().toString().equals(suoritukset.get(i).getOlotila())) {
+                        if (suoritus.getText().toString().equals(suoritukset.get(i).getSuoritus())) {
                             if(fysVointi <100){
                                 fysVointi += time * suoritukset.get(i).getMultiplier();
                                 weeklyFysVointi += time * suoritukset.get(i).getMultiplier();
@@ -300,7 +310,9 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-
+    /**
+     * Kun kutsutaan onPause methodia tallentaan dataa
+     */
     public void onPause() {
         //tallentaa tietoa
         SharedPreferences prefPut = getSharedPreferences(PREF, Activity.MODE_PRIVATE);
@@ -316,6 +328,10 @@ public class MainActivity extends AppCompatActivity {
         prefEditor.commit();
         super.onPause();
     }
+
+    /**
+     * Kutsuttaessa onResume methodia haetaan tiedot jotka tallennettiin onPause methodissa
+     */
     public void onResume(){
         SharedPreferences prefGet = getSharedPreferences(PREF, Activity.MODE_PRIVATE);
         henVointi = prefGet.getFloat("henVointi",50f);

@@ -10,6 +10,10 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+/**
+ * Tällä activitylla näytetään henkinen ja fyysinen hyvinvointi
+ *
+ */
 public class MittariActivity extends AppCompatActivity {
     private Button paiva;
     private Button viikko;
@@ -29,6 +33,11 @@ public class MittariActivity extends AppCompatActivity {
     private float alustaUusiHenk;
     private int numberOfDays;
     private ImageView hymy;
+
+    /**
+     * Alustetaan buttonit ja muuttujat, listätään niihin logiikka.
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,6 +63,7 @@ public class MittariActivity extends AppCompatActivity {
         henkinen = findViewById(R.id.henkLuku);
         uusiHenk = henVointi - 50;
         henkinen.setText(Integer.toString(Math.round(uusiHenk)));
+        viikkoUusiHenk = numberOfDays%7*(-50)+weeklyHenVointi;
         alustaUusiHenk = alltimeHenVointi -50*numberOfDays;
         hen.setProgress(Math.round(henVointi));
         fys.setProgress(fysVointi);
@@ -101,20 +111,19 @@ public class MittariActivity extends AppCompatActivity {
         viikko.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                if(weeklyHenVointi/7<50){
+                if(weeklyHenVointi<50){
                     hymy.setImageResource(R.drawable.suru);
-                }else if (weeklyHenVointi/7 >=50){
+                }else if (weeklyHenVointi >=50){
                     hymy.setImageResource(R.drawable.hymy);
                 }
                 paiva.setPressed(false);
                 viikko.setPressed(true);
                 alusta.setPressed(false);
                 int paivienMaara;
-                hen.setProgress(Math.round(weeklyHenVointi/((numberOfDays-1)%7)));
+                hen.setProgress(Math.round(weeklyHenVointi));
                 fys.setProgress(weeklyFysVointi/7);
                 fyysinen.setText(Integer.toString(weeklyFysVointi));
-                viikkoUusiHenk = weeklyHenVointi -50;
-                henkinen.setText(Integer.toString(Math.round(weeklyHenVointi/7)));
+                henkinen.setText(Integer.toString(Math.round(viikkoUusiHenk)));
                 fyysinenDailyProgress.setText(Integer.toString(weeklyFysVointi) + "/700");
                 return true;
             }
