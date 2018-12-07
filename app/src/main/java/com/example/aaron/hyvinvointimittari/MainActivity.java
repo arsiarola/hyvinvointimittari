@@ -296,7 +296,7 @@ public class MainActivity extends AppCompatActivity {
                 if (wrongText == true) {
                     oloTilaText.setText("virhe");
                 }
-                /// listätty checkbox toiminta olotiloihin
+                /// listätty checkbox toiminta olotiloihi
 
                 new CountDownTimer(2000, 1000) {
 
