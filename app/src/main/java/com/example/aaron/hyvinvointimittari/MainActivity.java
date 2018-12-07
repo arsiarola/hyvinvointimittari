@@ -11,6 +11,8 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
+
 import java.util.Calendar;
 import java.util.ArrayList;
 import java.util.TimeZone;
@@ -297,20 +299,6 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
-        //placeholder
-        userSettings.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(thisActivity, meemi.class);
-                // EditText editText = (EditText) findViewById(R.id.editText);
-                // String message = editText.getText().toString();
-                startActivity(intent);
-            }
-        });
-
-
-
     }
 
     public void onPause() {
