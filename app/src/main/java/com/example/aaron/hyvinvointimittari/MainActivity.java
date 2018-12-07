@@ -63,6 +63,10 @@ public class MainActivity extends AppCompatActivity {
     public final static String alltimeHen = "alltimeHenVointi";
     public final static String weeklyHen = "weeklyHenVointi";
     public final static String weeklyFys = "weeklyFysVointi";
+    public final static String oldallfys = "oldallfys";
+    public final static String oldallhen = "oldallhen";
+    public final static String oldweekfys = "oldweekfys";
+    public final static String oldweekhen = "oldweekhen";
     private int vanhaWeeklyFysVointi;
     private float vanhaWeeklyHenVointi;
     private int vanhaAlltimeFysVointi;
@@ -106,13 +110,16 @@ public class MainActivity extends AppCompatActivity {
         alltimeHenVointi = prefGet.getFloat("alltimeHenVointi", 50f);
         numberOfDays = prefGet.getInt("numberOfDays", 1);
         previousDate = prefGet.getInt("previousDate", day);
-        vanhaAlltimeFysVointi = alltimeFysVointi;
-        vanhaAllTimeHenVointi = alltimeHenVointi;
-        vanhaWeeklyFysVointi = weeklyFysVointi;
-        vanhaWeeklyHenVointi = weeklyHenVointi;
-        fysVointi = 10;
+        vanhaAllTimeHenVointi = prefGet.getFloat(oldallhen,50f);
+        vanhaWeeklyFysVointi = prefGet.getInt(oldweekfys,0);
+        vanhaWeeklyHenVointi = prefGet.getFloat(oldweekhen,50f);
+        vanhaAlltimeFysVointi= prefGet.getInt(oldallfys,0);
         //katsotaan onko päivä muuttunut
         if(previousDate != day){
+            vanhaAlltimeFysVointi = alltimeFysVointi;
+            vanhaWeeklyFysVointi = weeklyFysVointi;
+            vanhaWeeklyHenVointi = weeklyHenVointi+50;
+            vanhaAllTimeHenVointi = alltimeHenVointi+50;
             numberOfDays++;
             henVointi = 50;
             fysVointi = 0;
@@ -212,7 +219,7 @@ public class MainActivity extends AppCompatActivity {
                                 fysVointi += time * suoritukset.get(i).getMultiplier();
                                 weeklyFysVointi += time * suoritukset.get(i).getMultiplier();
                                 alltimeFysVointi += time * suoritukset.get(i).getMultiplier();
-                            }
+                            }//5
                             if(fysVointi>=100){
                                 fysVointi = 100;
                                 weeklyFysVointi = vanhaWeeklyFysVointi +100;
@@ -267,19 +274,16 @@ public class MainActivity extends AppCompatActivity {
                 wrongText = true;
                 for (int i = 0; i < olot.size(); i++) {
                     if (oloTilaText.getText().toString().equals(olot.get(i).getOlotila())) {
-                        if(henVointi <100){
-                            weeklyHenVointi += -henVointi + henVointi * olot.get(i).getMultiplier();
-                            alltimeHenVointi += -henVointi + henVointi*olot.get(i).getMultiplier();
-                            henVointi *= olot.get(i).getMultiplier();
+                        weeklyHenVointi += -henVointi + henVointi * olot.get(i).getMultiplier();
+                        alltimeHenVointi += -henVointi + henVointi*olot.get(i).getMultiplier();
+                        henVointi *= olot.get(i).getMultiplier();
 
-
-                        }
                         if (Math.round(henVointi) == 0) {
                             henVointi = 1;
                         }else if(henVointi >=100){
                             henVointi=100;
-                            alltimeFysVointi = vanhaAlltimeFysVointi+50;
-                            alltimeHenVointi = vanhaAllTimeHenVointi+50;
+                            alltimeHenVointi = vanhaAllTimeHenVointi+100;
+                            weeklyHenVointi = vanhaWeeklyHenVointi + 100;
                         }
                         if (Math.round(weeklyHenVointi) == 0) {
                             weeklyHenVointi = vanhaAllTimeHenVointi+1;
@@ -368,6 +372,10 @@ public class MainActivity extends AppCompatActivity {
         prefEditor.putFloat(alltimeHen, alltimeHenVointi);
         prefEditor.putInt("previousDate", kalenteri.get(kalenteri.DAY_OF_WEEK));
         prefEditor.putInt("numberOfDays", numberOfDays);
+        prefEditor.putFloat(oldallhen, vanhaAllTimeHenVointi);
+        prefEditor.putInt(oldweekfys,vanhaWeeklyFysVointi);
+        prefEditor.putFloat(oldweekhen,vanhaWeeklyHenVointi);
+        prefEditor.putInt(oldallfys,vanhaAlltimeFysVointi);
         prefEditor.commit();
         super.onPause();
     }
@@ -385,10 +393,10 @@ public class MainActivity extends AppCompatActivity {
         alltimeHenVointi = prefGet.getFloat("alltimeHenVointi", 50f);
         numberOfDays = prefGet.getInt("numberOfDays", 1);
         previousDate = prefGet.getInt("previousDate", day);
-        vanhaAlltimeFysVointi = alltimeFysVointi;
-        vanhaAllTimeHenVointi = alltimeHenVointi;
-        vanhaWeeklyFysVointi = weeklyFysVointi;
-        vanhaWeeklyHenVointi = weeklyHenVointi;
+        vanhaAllTimeHenVointi = prefGet.getFloat(oldallhen, vanhaAllTimeHenVointi);
+        vanhaWeeklyFysVointi =  prefGet.getInt(oldweekfys,vanhaWeeklyFysVointi);
+        vanhaWeeklyHenVointi = prefGet.getFloat(oldweekhen,vanhaWeeklyHenVointi);
+        vanhaAlltimeFysVointi= prefGet.getInt(oldallfys,vanhaAlltimeFysVointi);
         super.onResume();
     }
 }
