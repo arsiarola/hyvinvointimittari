@@ -10,6 +10,10 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+/**
+ * Tällä activitylla näytetään henkinen ja fyysinen hyvinvointi
+ *
+ */
 public class MittariActivity extends AppCompatActivity {
     private Button paiva;
     private Button viikko;
@@ -29,26 +33,37 @@ public class MittariActivity extends AppCompatActivity {
     private float alustaUusiHenk;
     private int numberOfDays;
     private ImageView hymy;
+
+    /**
+     * Alustetaan buttonit ja muuttujat, listätään niihin logiikka.
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mittari);
+
         fys = findViewById(R.id.progressBarFys);
         hen = findViewById(R.id.progressBarHenk);
+
         Intent intent = getIntent();
         henVointi = intent.getFloatExtra("extra", 50f);
         fysVointi = intent.getIntExtra("fysVointi", 0);
+
         weeklyHenVointi = intent.getFloatExtra("weeklyHenVointi",50f);
         weeklyFysVointi = intent.getIntExtra("weeklyFysVointi",0);
+
         alltimeHenVointi = intent.getFloatExtra("alltimeHenVointi",50f);
         alltimeFysVointi = intent.getIntExtra("alltimeFysVointi",50);
         numberOfDays = intent.getIntExtra("päiviä",1);
+
         fyysinen = findViewById(R.id.fysLuku);
         fyysinen.setText(Integer.toString(fysVointi));
+
         henkinen = findViewById(R.id.henkLuku);
         uusiHenk = henVointi - 50;
         henkinen.setText(Integer.toString(Math.round(uusiHenk)));
-        viikkoUusiHenk = weeklyHenVointi -350;
+        viikkoUusiHenk = numberOfDays%7*(-50)+weeklyHenVointi;
         alustaUusiHenk = alltimeHenVointi -50*numberOfDays;
         hen.setProgress(Math.round(henVointi));
         fys.setProgress(fysVointi);
@@ -96,18 +111,19 @@ public class MittariActivity extends AppCompatActivity {
         viikko.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                if(weeklyHenVointi/7<50){
+                if(weeklyHenVointi<50){
                     hymy.setImageResource(R.drawable.suru);
-                }else if (weeklyHenVointi/7 >=50){
+                }else if (weeklyHenVointi >=50){
                     hymy.setImageResource(R.drawable.hymy);
                 }
                 paiva.setPressed(false);
                 viikko.setPressed(true);
                 alusta.setPressed(false);
-                hen.setProgress(Math.round(weeklyHenVointi/7));
+                int paivienMaara;
+                hen.setProgress(Math.round(weeklyHenVointi));
                 fys.setProgress(weeklyFysVointi/7);
                 fyysinen.setText(Integer.toString(weeklyFysVointi));
-                henkinen.setText(Integer.toString(Math.round(viikkoUusiHenk/7)));
+                henkinen.setText(Integer.toString(Math.round(viikkoUusiHenk)));
                 fyysinenDailyProgress.setText(Integer.toString(weeklyFysVointi) + "/700");
                 return true;
             }
