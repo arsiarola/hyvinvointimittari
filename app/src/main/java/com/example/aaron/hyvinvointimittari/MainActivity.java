@@ -11,6 +11,8 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
+
 import java.util.Calendar;
 import java.util.ArrayList;
 import java.util.TimeZone;
@@ -28,7 +30,7 @@ import java.util.TimeZone;
  */
 
 /**
- * MainActivity deals with information on the main screen
+ * Tällä activitylla listätään henkisen- ja fyysisenhyvinvoinnin liittyviä toimenpitetiä
  */
 public class MainActivity extends AppCompatActivity {
     //Declaring variables
@@ -64,11 +66,20 @@ public class MainActivity extends AppCompatActivity {
     private int vanhaAlltimeFysVointi;
     private float vanhaAllTimeHenVointi;
 
+    /**
+     * Alustetaan buttonit ja muuttujat, listätään niihin logiikka.
+     * Olotilojen ja suorituksien luominen, jotka lisätään omiin arraylisteihinsä
+     * laskee kuluneet päivät joiden avulla voidaan määrittää onko viikko jo kulunut
+     * tehdään olotila- ja suorituslistoista uudet nimilistat joita käytetään Autocompleteview:n
+     * kanssa
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         //initializing variables
+
 
         mittariButton =  findViewById(R.id.mittari);
         meemiButton = findViewById(R.id.meemiButton);
@@ -95,6 +106,7 @@ public class MainActivity extends AppCompatActivity {
         vanhaAllTimeHenVointi = alltimeHenVointi;
         vanhaWeeklyFysVointi = weeklyFysVointi;
         vanhaWeeklyHenVointi = weeklyHenVointi;
+        fysVointi = 10;
         //katsotaan onko päivä muuttunut
         if(previousDate != day){
             numberOfDays++;
@@ -158,7 +170,7 @@ public class MainActivity extends AppCompatActivity {
         //luodaan olotila- ja suoritusvaihtoehdoista nimilistat
         ArrayList<String> suoritusNimet = new ArrayList<String>();
         for (int i = 0; i < suoritukset.size(); i++) {
-            suoritusNimet.add(suoritukset.get(i).getOlotila());
+            suoritusNimet.add(suoritukset.get(i).getSuoritus());
         }
         ArrayList<String> olotilaNimet = new ArrayList();
         for (int i = 0; i < olot.size(); i++) {
@@ -189,13 +201,9 @@ public class MainActivity extends AppCompatActivity {
                 } catch (NumberFormatException e) {
                     textFail = true;
                 }
-                if(!textFail && Double.parseDouble(suoritusMaara.getText().toString())>24) {
-                    suoritus.setText("virhe");
-                    wrongText= true;
-                }
-               else if (!textFail) {
+                if (!textFail) {
                     for (int i = 0; i < suoritukset.size(); i++) {
-                        if (suoritus.getText().toString().equals(suoritukset.get(i).getOlotila())) {
+                        if (suoritus.getText().toString().equals(suoritukset.get(i).getSuoritus())) {
                             if(fysVointi <100){
                                 fysVointi += time * suoritukset.get(i).getMultiplier();
                                 weeklyFysVointi += time * suoritukset.get(i).getMultiplier();
@@ -220,7 +228,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-        //tyhjentää tekstikentän, kun sitä klikataan
+        //tyhjentää tiedot
         suoritus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -301,11 +309,10 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
-
-
     }
-
+    /**
+     * Kun kutsutaan onPause methodia tallentaan dataa
+     */
     public void onPause() {
         //tallentaa tietoa
         SharedPreferences prefPut = getSharedPreferences(PREF, Activity.MODE_PRIVATE);
@@ -321,6 +328,10 @@ public class MainActivity extends AppCompatActivity {
         prefEditor.commit();
         super.onPause();
     }
+
+    /**
+     * Kutsuttaessa onResume methodia haetaan tiedot jotka tallennettiin onPause methodissa
+     */
     public void onResume(){
         SharedPreferences prefGet = getSharedPreferences(PREF, Activity.MODE_PRIVATE);
         henVointi = prefGet.getFloat("henVointi",50f);
