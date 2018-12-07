@@ -30,7 +30,11 @@ import java.util.TimeZone;
  */
 
 /**
+<<<<<<< HEAD
+ * MainActivity deals with information on the main screen
+=======
  * Tällä activitylla listätään henkisen- ja fyysisenhyvinvoinnin liittyviä toimenpitetiä
+>>>>>>> 4d82e293225616ba1451212fe2f6f14b25edbe52
  */
 public class MainActivity extends AppCompatActivity {
     //Declaring variables
@@ -79,8 +83,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         //initializing variables
-
-
         mittariButton =  findViewById(R.id.mittari);
         meemiButton = findViewById(R.id.meemiButton);
         thisActivity = this;
@@ -106,7 +108,6 @@ public class MainActivity extends AppCompatActivity {
         vanhaAllTimeHenVointi = alltimeHenVointi;
         vanhaWeeklyFysVointi = weeklyFysVointi;
         vanhaWeeklyHenVointi = weeklyHenVointi;
-        fysVointi = 10;
         //katsotaan onko päivä muuttunut
         if(previousDate != day){
             numberOfDays++;
@@ -325,6 +326,10 @@ public class MainActivity extends AppCompatActivity {
         prefEditor.putFloat(alltimeHen, alltimeHenVointi);
         prefEditor.putInt("previousDate", kalenteri.get(kalenteri.DAY_OF_WEEK));
         prefEditor.putInt("numberOfDays", numberOfDays);
+        prefEditor.putInt("vanhaallfys",vanhaAlltimeFysVointi);
+        prefEditor.putFloat("vanhaallhen",vanhaAllTimeHenVointi);
+        prefEditor.putInt("vanhweekfys",vanhaWeeklyFysVointi);
+        prefEditor.putFloat("vanhaweekhen",vanhaWeeklyHenVointi);
         prefEditor.commit();
         super.onPause();
     }
