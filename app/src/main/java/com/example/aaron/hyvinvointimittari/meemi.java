@@ -67,12 +67,10 @@ public class meemi extends AppCompatActivity {
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                if(henVointi<100){
                     weeklyHenVointi+= -henVointi+henVointi*(float)1.1;
                     alltimeHenVointi+= -henVointi+henVointi*(float)1.1;
                     henVointi*= (float)1.1;
-                }
+
                 if (henVointi>=100){
                     henVointi = 100;
                     weeklyHenVointi = vanhaWeeklyHenVointi + 100;
