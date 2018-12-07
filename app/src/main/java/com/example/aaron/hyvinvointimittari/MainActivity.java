@@ -4,12 +4,14 @@ package com.example.aaron.hyvinvointimittari;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -79,7 +81,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         //initializing variables
-
+        //checkboxit
+        final CheckBox checkBoxFys = findViewById(R.id.checkBoxFys);
+        final CheckBox checkBoxHenk = findViewById(R.id.checkBoxHenk);
 
         mittariButton =  findViewById(R.id.mittari);
         meemiButton = findViewById(R.id.meemiButton);
@@ -226,6 +230,26 @@ public class MainActivity extends AppCompatActivity {
                     suoritus.setText("virhe");
 
                 }
+                /// listätty checkbox toiminta
+
+                new CountDownTimer(2000, 1000) {
+
+                    public void onTick(long millisUntilFinished) {
+                        if(wrongText) {
+                            checkBoxFys.setText("Ei lisätty");
+                            checkBoxFys.setChecked(false);
+                        } else {
+                            checkBoxFys.setText("Lisätty");
+                            checkBoxFys.setChecked(true);
+                        }
+                }
+
+                    public void onFinish() {
+                        checkBoxFys.setText("");
+                        checkBoxFys.setChecked(false);
+                    }
+                }.start();
+
             }
         });
         //tyhjentää tiedot
@@ -272,6 +296,25 @@ public class MainActivity extends AppCompatActivity {
                 if (wrongText == true) {
                     oloTilaText.setText("virhe");
                 }
+                /// listätty checkbox toiminta olotiloihin
+
+                new CountDownTimer(2000, 1000) {
+
+                    public void onTick(long millisUntilFinished) {
+                        if(wrongText) {
+                            checkBoxHenk.setText("Ei lisätty");
+                            checkBoxHenk.setChecked(false);
+                        } else {
+                            checkBoxHenk.setText("Lisätty");
+                            checkBoxHenk.setChecked(true);
+                        }
+                    }
+
+                    public void onFinish() {
+                        checkBoxHenk.setText("");
+                        checkBoxHenk.setChecked(false);
+                    }
+                }.start();
             }
         });
 
