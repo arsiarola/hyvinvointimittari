@@ -212,8 +212,6 @@ public class MainActivity extends AppCompatActivity {
                             }
                             if(fysVointi>=100){
                                 fysVointi = 100;
-                                weeklyFysVointi = vanhaWeeklyFysVointi +100;
-                                alltimeFysVointi = vanhaAlltimeFysVointi+100;
                             }
                             suoritus.setText("");
                             suoritusMaara.setText("");
@@ -255,8 +253,6 @@ public class MainActivity extends AppCompatActivity {
                             henVointi = 1;
                         }else if(henVointi >=100){
                             henVointi=100;
-                            alltimeFysVointi = vanhaAlltimeFysVointi+50;
-                            alltimeHenVointi = vanhaAllTimeHenVointi+50;
                         }
                         if (Math.round(weeklyHenVointi) == 0) {
                             weeklyHenVointi = vanhaAllTimeHenVointi+1;
