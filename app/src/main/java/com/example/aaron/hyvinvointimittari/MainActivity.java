@@ -1,4 +1,3 @@
-
 package com.example.aaron.hyvinvointimittari;
 
 import android.app.Activity;
@@ -20,16 +19,16 @@ import java.util.ArrayList;
 import java.util.TimeZone;
 
 /*ideas for project:
-  maybe a little minigame if henVointi is low, which could be harder based on how low it is. e.g. tap some stuff on the screen
-  , jump over obstacles or something like in the google dinosaurs minigame. could then increase henVoinit
-  Display a meme if henVointi is low, could also display smiley if happy, sad face if not etc
-  fysVointi needs a parameter to set amount of time you did the exercise. Could later tell you how much you'd need to exercise
-  (a specific sport maybe) to fill the fysVointi meter.
-  could make most recent emotion to have a bigger impact on meter
-  could add all instances of suoritukset and olotilat into an array and have the user be able to access what he/she has done/felt like before
-  this way we can also get listview and saving information to the project
+ maybe a little minigame if henVointi is low, which could be harder based on how low it is. e.g. tap some stuff on the screen
+ , jump over obstacles or something like in the google dinosaurs minigame. could then increase henVoinit
+ Display a meme if henVointi is low, could also display smiley if happy, sad face if not etc
+ fysVointi needs a parameter to set amount of time you did the exercise. Could later tell you how much you'd need to exercise
+ (a specific sport maybe) to fill the fysVointi meter.
+ could make most recent emotion to have a bigger impact on meter
+ could add all instances of suoritukset and olotilat into an array and have the user be able to access what he/she has done/felt like before
+ this way we can also get listview and saving information to the project
 
- */
+*/
 
 /**
  * Tällä activitylla listätään henkisen- ja fyysisenhyvinvoinnin liittyviä toimenpitetiä
@@ -88,7 +87,10 @@ public class MainActivity extends AppCompatActivity {
         //checkboxit
         final CheckBox checkBoxFys = findViewById(R.id.checkBoxFys);
         final CheckBox checkBoxHenk = findViewById(R.id.checkBoxHenk);
-
+        checkBoxFys.setText("");
+        checkBoxHenk.setText("");
+        checkBoxHenk.setChecked(false);
+        checkBoxFys.setChecked(false);
         mittariButton =  findViewById(R.id.mittari);
         meemiButton = findViewById(R.id.meemiButton);
         thisActivity = this;
@@ -249,7 +251,7 @@ public class MainActivity extends AppCompatActivity {
                             checkBoxFys.setText("Lisätty");
                             checkBoxFys.setChecked(true);
                         }
-                }
+                    }
 
                     public void onFinish() {
                         checkBoxFys.setText("");
