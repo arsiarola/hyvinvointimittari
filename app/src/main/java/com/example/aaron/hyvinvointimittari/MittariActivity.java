@@ -54,7 +54,7 @@ public class MittariActivity extends AppCompatActivity {
         weeklyFysVointi = intent.getIntExtra("weeklyFysVointi",0);
 
         alltimeHenVointi = intent.getFloatExtra("alltimeHenVointi",50f);
-        alltimeFysVointi = intent.getIntExtra("alltimeFysVointi",50);
+        alltimeFysVointi = intent.getIntExtra("alltimeFysVointi",0);
         numberOfDays = intent.getIntExtra("päiviä",1);
 
         fyysinen = findViewById(R.id.fysLuku);
@@ -111,16 +111,16 @@ public class MittariActivity extends AppCompatActivity {
         viikko.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                if(weeklyHenVointi<50){
+                if(weeklyHenVointi/(numberOfDays%7)<50){
                     hymy.setImageResource(R.drawable.suru);
-                }else if (weeklyHenVointi >=50){
+                }else if (weeklyHenVointi/(numberOfDays%7) >=50){
                     hymy.setImageResource(R.drawable.hymy);
                 }
                 paiva.setPressed(false);
                 viikko.setPressed(true);
                 alusta.setPressed(false);
                 int paivienMaara;
-                hen.setProgress(Math.round(weeklyHenVointi));
+                hen.setProgress(Math.round(weeklyHenVointi/(numberOfDays%7)));
                 fys.setProgress(weeklyFysVointi/7);
                 fyysinen.setText(Integer.toString(weeklyFysVointi));
                 henkinen.setText(Integer.toString(Math.round(viikkoUusiHenk)));

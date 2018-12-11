@@ -19,18 +19,6 @@ import java.util.Calendar;
 import java.util.ArrayList;
 import java.util.TimeZone;
 
-/*ideas for project:
-  maybe a little minigame if henVointi is low, which could be harder based on how low it is. e.g. tap some stuff on the screen
-  , jump over obstacles or something like in the google dinosaurs minigame. could then increase henVoinit
-  Display a meme if henVointi is low, could also display smiley if happy, sad face if not etc
-  fysVointi needs a parameter to set amount of time you did the exercise. Could later tell you how much you'd need to exercise
-  (a specific sport maybe) to fill the fysVointi meter.
-  could make most recent emotion to have a bigger impact on meter
-  could add all instances of suoritukset and olotilat into an array and have the user be able to access what he/she has done/felt like before
-  this way we can also get listview and saving information to the project
-
- */
-
 /**
  * Tällä activitylla listätään henkisen- ja fyysisenhyvinvoinnin liittyviä toimenpitetiä
  */
@@ -103,35 +91,8 @@ public class MainActivity extends AppCompatActivity {
         kalenteri = Calendar.getInstance(TimeZone.getTimeZone("EET"));
         kalenteri.setFirstDayOfWeek(Calendar.MONDAY);
         day = kalenteri.get(kalenteri.DAY_OF_WEEK);
-        //haetaan tallenettu data
-        SharedPreferences prefGet = getSharedPreferences(PREF, Activity.MODE_PRIVATE);
-        henVointi = prefGet.getFloat("henVointi",50f);
-        fysVointi = prefGet.getInt("fysVointi", 0);
-        weeklyHenVointi = prefGet.getFloat("weeklyHenVointi", 50f);
-        weeklyFysVointi = prefGet.getInt("weeklyFysVointi", 0);
-        alltimeFysVointi = prefGet.getInt("alltimeFysVointi", 0);
-        alltimeHenVointi = prefGet.getFloat("alltimeHenVointi", 50f);
-        numberOfDays = prefGet.getInt("numberOfDays", 1);
-        previousDate = prefGet.getInt("previousDate", day);
-        vanhaAllTimeHenVointi = prefGet.getFloat(oldallhen,50f);
-        vanhaWeeklyFysVointi = prefGet.getInt(oldweekfys,0);
-        vanhaWeeklyHenVointi = prefGet.getFloat(oldweekhen,50f);
-        vanhaAlltimeFysVointi= prefGet.getInt(oldallfys,0);
-        //katsotaan onko päivä muuttunut
-        if(previousDate != day){
-            vanhaAlltimeFysVointi = alltimeFysVointi;
-            vanhaWeeklyFysVointi = weeklyFysVointi;
-            vanhaWeeklyHenVointi = weeklyHenVointi+50;
-            vanhaAllTimeHenVointi = alltimeHenVointi+50;
-            numberOfDays++;
-            henVointi = 50;
-            fysVointi = 0;
-            if(day == 2){
-                weeklyFysVointi = 0;
-                weeklyHenVointi = 50;
-            }
 
-        }
+
 
         //luodaan eri olotiloja
         olot = new ArrayList<olotilat>();
@@ -400,6 +361,20 @@ public class MainActivity extends AppCompatActivity {
         vanhaWeeklyFysVointi =  prefGet.getInt(oldweekfys,vanhaWeeklyFysVointi);
         vanhaWeeklyHenVointi = prefGet.getFloat(oldweekhen,vanhaWeeklyHenVointi);
         vanhaAlltimeFysVointi= prefGet.getInt(oldallfys,vanhaAlltimeFysVointi);
+        //katsotaan onko päivä muuttunut
+        if(previousDate != day){
+            vanhaAlltimeFysVointi = alltimeFysVointi;
+            vanhaWeeklyFysVointi = weeklyFysVointi;
+            vanhaWeeklyHenVointi = weeklyHenVointi+50;
+            vanhaAllTimeHenVointi = alltimeHenVointi+50;
+            numberOfDays++;
+            henVointi = 50;
+            fysVointi = 0;
+            if(numberOfDays%7 == 0){
+                weeklyFysVointi = 0;
+                weeklyHenVointi = 50;
+            }
+        }
         super.onResume();
     }
 }
